@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindCare AI - Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9ff;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: #FFD700;
+        }
+
+        .admin-nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+        }
+
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Sidebar */
+        .dashboard-container {
+            display: flex;
+            min-height: calc(100vh - 80px);
+        }
+
+        .sidebar {
+            width: 280px;
+            background: white;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem 0;
+            position: fixed;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .sidebar-menu a.active,
+        .sidebar-menu a:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .sidebar-menu a.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #FFD700;
+        }
+
+        .sidebar-menu i {
+            font-size: 1.2rem;
+            width: 20px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .page-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .page-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Dashboard Cards */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .card-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Charts Section */
+        .charts-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .chart-filter {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            background: white;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .mock-chart {
+            height: 300px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e6f0ff 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #667eea;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Tables */
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem 2rem;
+        }
+
+        .table-header h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem 2rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table th {
+            background: #f8f9ff;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f8f9ff;
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #E8F5E8;
+            color: #4CAF50;
+        }
+
+        .status-warning {
+            background: #FFF3CD;
+            color: #FF9800;
+        }
+
+        .status-critical {
+            background: #FFEBEE;
+            color: #f44336;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b, #ff5252);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .charts-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .alert-success {
+            background: #E8F5E8;
+            color: #4CAF50;
+            border: 1px solid #C8E6C9;
+        }
+
+        .alert-warning {
+            background: #FFF3CD;
+            color: #FF9800;
+            border: 1px solid #FFE082;
+        }
+
+        .alert-danger {
+            background: #FFEBEE;
+            color: #f44336;
+            border: 1px solid #FFCDD2;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .quick-actions {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .quick-actions h3 {
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .quick-action-btn {
+            padding: 1rem;
+            background: linear-gradient(135deg, #f8f9ff, #e6f0ff);
+            border: 1px solid #e0e7ff;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action-btn:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <i class="fas fa-brain"></i>
+                MindCare AI Admin
+            </a>
+            <nav class="admin-nav">
+                <a href="#" class="nav-item">
+                    <i class="fas fa-bell"></i>
+                    Notifications
+                    <span style="background: #ff4444; color: white; font-size: 0.7rem; padding: 0.2rem 0.5rem; border-radius: 10px; margin-left: 0.5rem;">5</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                </a>
+            </nav>
+            <div class="admin-profile">
+                <div class="profile-avatar">AD</div>
+                <div>
+                    <div style="font-weight: 600;">Admin User</div>
+                    <div style="font-size: 0.8rem; opacity: 0.8;">System Administrator</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Admin Dashboard</h1>
+                <p>Comprehensive mental health platform analytics and management</p>
+            </div>
+
+            <!-- Alert Messages -->
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                3 high-risk users identified requiring immediate attention
+            </div>
+
+            <!-- Dashboard Overview Cards -->
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-title">Active Users</div>
+                    </div>
+                    <div class="card-value">2,847</div>
+                    <div class="card-label">Students currently active</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78%"></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="card-title">AI Interactions</div>
+                    </div>
+                    <div class="card-value">15,692</div>
+                    <div class="card-label">Total conversations today</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 92%"></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="card-title">Crisis Alerts</div>
+                    </div>
+                    <div class="card-value">23</div>
+                    <div class="card-label">Requiring immediate attention</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 35%; background: linear-gradient(135deg, #ff6b6b, #ff5252);"></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="card-title">Success Rate</div>
+                    </div>
+                    <div class="card-value">94.2%</div>
+                    <div class="card-label">Positive outcome interventions</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 94%; background: linear-gradient(135deg, #4CAF50, #45a049);"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="quick-actions-grid">
+                    <a href="#" class="quick-action-btn" onclick="openModal('userModal')">
+                        <i class="fas fa-user-plus"></i><br>Add New User
+                    </a>
+                    <a href="#" class="quick-action-btn" onclick="openModal('contentModal')">
+                        <i class="fas fa-file-plus"></i><br>Add Content
+                    </a>
+                    <a href="#" class="quick-action-btn" onclick="generateReport()">
+                        <i class="fas fa-file-pdf"></i><br>Generate Report
+                    </a>
+                    <a href="#" class="quick-action-btn" onclick="viewCrisisAlerts()">
+                        <i class="fas fa-exclamation-circle"></i><br>Crisis Alerts
+                    </a>
+                    <a href="#" class="quick-action-btn" onclick="openModal('settingsModal')">
+                        <i class="fas fa-cog"></i><br>System Config
+                    </a>
+                    <a href="#" class="quick-action-btn" onclick="exportData()">
+                        <i class="fas fa-download"></i><br>Export Data
+                    </a>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-section">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Mental Health Trends</h3>
+                        <select class="chart-filter">
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                            <option>Last 90 days</option>
+                        </select>
+                    </div>
+                    <div class="mock-chart">
+                        <div style="text-align: center;">
+                            <i class="fas fa-chart-line" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
+                            Interactive Mental Health Trend Chart<br>
+                            <small>Showing depression, anxiety, and stress levels over time</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">User Demographics</h3>
+                    </div>
+                    <div class="mock-chart" style="height: 200px;">
+                        <div style="text-align: center;">
+                            <i class="fas fa-chart-pie" style="font-size: 2rem; margin-bottom: 1rem; display: block;"></i>
+                            Demographic Breakdown<br>
+                            <small>Age, gender, academic level</small>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Undergraduate</span>
+                            <span>68%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Graduate</span>
+                            <span>24%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Postgraduate</span>
+                            <span>8%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Management Table -->
+            <div class="table-container">
+                <div class="table-header">
+                    <h3><i class="fas fa-users"></i> Recent User Activities</h3>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Last Active</th>
+                            <th>Risk Level</th>
+                            <th>AI Sessions</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>USR001</td>
+                            <td>Sarah Johnson</td>
+                            <td>2 minutes ago</td>
+                            <td><span class="status-badge status-active">Low</span></td>
+                            <td>15</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>
+                                <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;" onclick="viewUser('USR001')">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>USR002</td>
+                            <td>Michael Chen</td>
+                            <td>15 minutes ago</td>
+                            <td><span class="status-badge status-warning">Medium</span></td>
+                            <td>8</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>
+                                <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;" onclick="viewUser('USR002')">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>USR003</td>
+                            <td>Emma Davis</td>
+                            <td>1 hour ago</td>
+                            <td><span class="status-badge status-critical">High</span></td>
+                            <td>32</td>
+                            <td><span class="status-badge status-warning">Monitoring</span></td>
+                            <td>
+                                <button class="btn btn-danger" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;" onclick="viewUser('USR003')">Urgent</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>USR004</td>
+                            <td>James Wilson</td>
+                            <td>3 hours ago</td>
+                            <td><span class="status-badge status-active">Low</span></td>
+                            <td>12</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>
+                                <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;" onclick="viewUser('USR004')">View</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="exportData()">
+                    <i class="fas fa-download"></i>
+                    Export All Data
+                </button>
+                <button class="btn btn-secondary" onclick="generateReport()">
+                    <i class="fas fa-file-alt"></i>
+                    Generate Report
+                </button>
+                <button class="btn btn-danger" onclick="viewCrisisAlerts()">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Crisis Management
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- User Management Modal -->
+    <div class="modal" id="userModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New User</h3>
+                <button class="close-btn" onclick="closeModal('userModal')">&times;</button>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" placeholder="Enter full name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="Enter email address" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">University</label>
+                    <select class="form-select" required>
+                        <option value="">Select University</option>
+                        <option value="mit">MIT</option>
+                        <option value="stanford">Stanford University</option>
+                        <option value="harvard">Harvard University</option>
+                        <option value="berkeley">UC Berkeley</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Academic Level</label>
+                    <select class="form-select" required>
+                        <option value="">Select Level</option>
+                        <option value="undergraduate">Undergraduate</option>
+                        <option value="graduate">Graduate</option>
+                        <option value="postgraduate">Postgraduate</option>
+                    </select>
+                </div>
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Add User
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('userModal')">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Content Management Modal -->
+    <div class="modal" id="contentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Content</h3>
+                <button class="close-btn" onclick="closeModal('contentModal')">&times;</button>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Content Title</label>
+                    <input type="text" class="form-input" placeholder="Enter content title" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Content Type</label>
+                    <select class="form-select" required>
+                        <option value="">Select Type</option>
+                        <option value="article">Article</option>
+                        <option value="video">Video</option>
+                        <option value="exercise">Exercise</option>
+                        <option value="resource">Resource</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" required>
+                        <option value="">Select Category</option>
+                        <option value="anxiety">Anxiety Management</option>
+                        <option value="depression">Depression Support</option>
+                        <option value="stress">Stress Relief</option>
+                        <option value="wellness">General Wellness</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Content Description</label>
+                    <textarea class="form-textarea" placeholder="Enter content description" required></textarea>
+                </div>
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Add Content
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('contentModal')">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">System Configuration</h3>
+                <button class="close-btn" onclick="closeModal('settingsModal')">&times;</button>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">AI Response Timeout (seconds)</label>
+                    <input type="number" class="form-input" value="30" min="10" max="120">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Crisis Alert Threshold</label>
+                    <select class="form-select">
+                        <option value="low">Low Sensitivity</option>
+                        <option value="medium" selected>Medium Sensitivity</option>
+                        <option value="high">High Sensitivity</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Data Retention Period (days)</label>
+                    <input type="number" class="form-input" value="365" min="30" max="2555">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Notifications</label>
+                    <select class="form-select">
+                        <option value="all">All Notifications</option>
+                        <option value="critical" selected>Critical Only</option>
+                        <option value="none">Disabled</option>
+                    </select>
+                </div>
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Save Settings
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('settingsModal')">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal Management
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    closeModal(modal.id);
+                }
+            });
+        }
+
+        // Sidebar Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
+            
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    sidebarLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Update page content based on selection
+                    updatePageContent(this.getAttribute('href').substring(1));
+                });
+            });
+        });
+
+        // Update Page Content
+        function updatePageContent(section) {
+            const pageHeader = document.querySelector('.page-header h1');
+            const pageSubtitle = document.querySelector('.page-header p');
+            
+            switch(section) {
+                case 'users':
+                    pageHeader.textContent = 'User Management';
+                    pageSubtitle.textContent = 'Manage student accounts, profiles, and access permissions';
+                    break;
+                case 'content':
+                    pageHeader.textContent = 'Content Management';
+                    pageSubtitle.textContent = 'Create and manage mental health resources and educational content';
+                    break;
+                case 'analytics':
+                    pageHeader.textContent = 'Analytics Dashboard';
+                    pageSubtitle.textContent = 'Comprehensive analytics and insights on platform usage';
+                    break;
+                case 'reports':
+                    pageHeader.textContent = 'Report Generation';
+                    pageSubtitle.textContent = 'Generate detailed reports for administrators and stakeholders';
+                    break;
+                case 'settings':
+                    pageHeader.textContent = 'System Settings';
+                    pageSubtitle.textContent = 'Configure system parameters and administrative preferences';
+                    break;
+                case 'crisis':
+                    pageHeader.textContent = 'Crisis Management';
+                    pageSubtitle.textContent = 'Monitor and respond to high-risk situations and emergency alerts';
+                    break;
+                default:
+                    pageHeader.textContent = 'Admin Dashboard';
+                    pageSubtitle.textContent = 'Comprehensive mental health platform analytics and management';
+            }
+        }
+
+        // User Management Functions
+        function viewUser(userId) {
+            alert(`Viewing detailed profile for user: ${userId}\n\nThis would open a comprehensive user dashboard showing:\n- Interaction history\n- Risk assessment details\n- AI conversation summaries\n- Professional referrals\n- Progress tracking`);
+        }
+
+        // Data Export Functions
+        function exportData() {
+            alert('Exporting platform data...\n\nThis would generate:\n- User statistics\n- AI interaction logs\n- Mental health trends\n- Crisis intervention reports\n- Compliance documentation');
+        }
+
+        function generateReport() {
+            alert('Generating comprehensive report...\n\nReport will include:\n- Platform usage statistics\n- Mental health trend analysis\n- Intervention effectiveness\n- User engagement metrics\n- System performance data');
+        }
+
+        // Crisis Management
+        function viewCrisisAlerts() {
+            alert('Crisis Management Dashboard\n\nShowing:\n- 3 High-risk users requiring immediate attention\n- 12 Medium-risk users under monitoring\n- Recent crisis interventions\n- Emergency contact protocols\n- Professional referral status');
+        }
+
+        // Form Submissions
+        document.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const modal = form.closest('.modal');
+            
+            if (modal) {
+                const modalTitle = modal.querySelector('.modal-title').textContent;
+                alert(`${modalTitle} - Form submitted successfully!\n\nData would be processed and saved to the system database.`);
+                closeModal(modal.id);
+                
+                // Reset form
+                form.reset();
+            }
+        });
+
+        // Real-time Updates Simulation
+        function simulateRealTimeUpdates() {
+            const statsCards = document.querySelectorAll('.card-value');
+            
+            setInterval(() => {
+                statsCards.forEach(card => {
+                    const currentValue = parseInt(card.textContent.replace(/[^0-9]/g, ''));
+                    const variation = Math.floor(Math.random() * 10) - 5; // Random variation
+                    const newValue = Math.max(0, currentValue + variation);
+                    
+                    if (card.textContent.includes('%')) {
+                        card.textContent = Math.min(100, newValue) + '%';
+                    } else if (card.textContent.includes('+')) {
+                        card.textContent = newValue.toLocaleString() + '+';
+                    } else {
+                        card.textContent = newValue.toLocaleString();
+                    }
+                });
+            }, 30000); // Update every 30 seconds
+        }
+
+        // Initialize real-time updates
+        simulateRealTimeUpdates();
+
+        // Interactive Chart Placeholder
+        function initializeCharts() {
+            const chartContainers = document.querySelectorAll('.mock-chart');
+            
+            chartContainers.forEach(container => {
+                container.addEventListener('click', function() {
+                    alert('Interactive Chart Feature\n\nThis would display:\n- Real-time data visualization\n- Drill-down capabilities\n- Export options\n- Comparative analysis\n- Trend predictions');
+                });
+            });
+        }
+
+        // Initialize charts
+        initializeCharts();
+
+        // Search and Filter Functionality
+        function addSearchAndFilter() {
+            const tableContainer = document.querySelector('.table-container');
+            const searchHTML = `
+                <div style="padding: 1rem 2rem; border-bottom: 1px solid #eee; background: #f8f9ff;">
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <input type="text" placeholder="Search users..." style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 5px;">
+                        <select style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 5px;">
+                            <option>All Status</option>
+                            <option>Active</option>
+                            <option>Monitoring</option>
+                            <option>Inactive</option>
+                        </select>
+                        <select style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 5px;">
+                            <option>All Risk Levels</option>
+                            <option>Low</option>
+                            <option>Medium</option>
+                            <option>High</option>
+                        </select>
+                    </div>
+                </div>
+            `;
+            tableContainer.querySelector('.table-header').insertAdjacentHTML('afterend', searchHTML);
+        }
+
+        // Add search functionality
+        addSearchAndFilter();
+
+        // Responsive sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        // Add mobile menu button for responsive design
+        if (window.innerWidth <= 1024) {
+            const header = document.querySelector('.header-content');
+            const mobileToggle = document.createElement('button');
+            mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            mobileToggle.style.cssText = 'background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; display: block;';
+            mobileToggle.onclick = toggleSidebar;
+            header.appendChild(mobileToggle);
+        }
+
+        // Notification System
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type}`;
+            notification.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
+            notification.style.cssText = 'position: fixed; top: 100px; right: 20px; z-index: 1001; min-width: 300px;';
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        // Auto-refresh dashboard data
+        function refreshDashboard() {
+            showNotification('Dashboard data refreshed successfully', 'success');
+        }
+
+        // Set auto-refresh every 5 minutes
+        setInterval(refreshDashboard, 300000);
+    </script>
+</body>
+</html>
