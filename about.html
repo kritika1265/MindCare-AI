@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>About — MindCare AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="gradient-bg">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+
+        <header>
+            <nav>
+                <a href="index.html" class="logo"><i class="fas fa-brain"></i>MindCare AI</a>
+                <div class="nav-menu" id="navMenu">
+                    <ul class="nav-links">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="ai-assistant.html">AI Assistant</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="index.html">Contact</a></li>
+                    </ul>
+                    <div class="auth-buttons">
+                        <a href="login_page.html" class="btn-auth btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        <a href="registration_page.html" class="btn-auth btn-register"><i class="fas fa-user-plus"></i> Register</a>
+                        <a href="admin_page.html" class="btn-auth btn-admin"><i class="fas fa-user-shield"></i> Admin</a>
+                    </div>
+                </div>
+                <button class="mobile-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+            </nav>
+        </header>
+
+        <section style="padding:6rem 0;">
+            <div class="container">
+                <h2 class="section-title">About MindCare AI</h2>
+                <p class="section-subtitle">Our mission is to make student mental health support accessible, private, and actionable.</p>
+
+                <div style="display:flex; gap:2rem; flex-wrap:wrap; margin-top:2rem;">
+                    <div style="flex:1; min-width:320px;">
+                        <div style="background:white; padding:2rem; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+                            <h3 style="color:#667eea; margin-bottom:1rem;">Our Story</h3>
+                            <p>MindCare AI began as a student mental health initiative focused on bridging gaps in access. Combining research-backed therapy techniques with privacy-first AI, we help students get timely support and connect with professionals when needed.</p>
+                        </div>
+                    </div>
+
+                    <div style="flex:1; min-width:320px;">
+                        <div style="background:white; padding:2rem; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+                            <h3 style="color:#667eea; margin-bottom:1rem;">Our Values</h3>
+                            <ul style="list-style:none; padding-left:0; color:#666;">
+                                <li style="margin-bottom:.6rem;"><i class="fas fa-check-circle" style="color:#FFD700; margin-right:.6rem;"></i> Privacy & Consent</li>
+                                <li style="margin-bottom:.6rem;"><i class="fas fa-check-circle" style="color:#FFD700; margin-right:.6rem;"></i> Evidence-based support</li>
+                                <li style="margin-bottom:.6rem;"><i class="fas fa-check-circle" style="color:#FFD700; margin-right:.6rem;"></i> Accessibility and inclusion</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top:2rem;">
+                    <h3 style="font-family:'Poppins',sans-serif;">Team & Partners</h3>
+                    <p style="color:#666;">We collaborate with clinical psychologists, university counseling centers, and privacy experts to ensure the platform is both safe and effective.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer style="margin-top:2rem;">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3><i class="fas fa-brain" style="color:#FFD700; margin-right:.5rem;"></i>MindCare AI</h3>
+                        <p style="color:#ccc;">Committed to student wellbeing through smart, secure technology.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Platform</h3>
+                        <a href="login_page.html">Student Login</a>
+                        <a href="registration_page.html">Create Account</a>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Resources</h3>
+                        <a href="#">Help Center</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Contact</h3>
+                        <a href="mailto:support@mindcareai.edu">support@mindcareai.edu</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 MindCare AI. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="floating-chat" onclick="toggleFloatingChat()"><i class="fas fa-comments"></i></div>
+
+    <script>
+        function toggleMobileMenu(){ document.getElementById('navMenu').classList.toggle('active'); }
+        function toggleFloatingChat(){ alert('Quick Chat: Opening instant AI assistance.'); }
+    </script>
+</body>
+</html>

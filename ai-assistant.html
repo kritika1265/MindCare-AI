@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AI Assistant — MindCare AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="gradient-bg">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+
+        <header>
+            <nav>
+                <a href="index.html" class="logo"><i class="fas fa-brain"></i>MindCare AI</a>
+                <div class="nav-menu" id="navMenu">
+                    <ul class="nav-links">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="ai-assistant.html">AI Assistant</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="index.html">Contact</a></li>
+                    </ul>
+                    <div class="auth-buttons">
+                        <a href="login_page.html" class="btn-auth btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        <a href="registration_page.html" class="btn-auth btn-register"><i class="fas fa-user-plus"></i> Register</a>
+                        <a href="admin_page.html" class="btn-auth btn-admin"><i class="fas fa-user-shield"></i> Admin</a>
+                    </div>
+                </div>
+                <button class="mobile-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+            </nav>
+        </header>
+
+        <section class="ai-section" style="padding-top:4rem;">
+            <div class="container">
+                <div class="ai-container">
+                    <div class="ai-content">
+                        <h2>Meet the AI Assistant</h2>
+                        <p>Designed for empathetic conversation, quick triage, and integration with professional care when needed.</p>
+                        <ul class="ai-features">
+                            <li><i class="fas fa-check-circle"></i>24/7 conversational support</li>
+                            <li><i class="fas fa-check-circle"></i>Crisis detection and escalation</li>
+                            <li><i class="fas fa-check-circle"></i>Personal coping plans and exercises</li>
+                            <li><i class="fas fa-check-circle"></i>Secure data handling and consent flows</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary" onclick="openChatbot()">Start Conversation</a>
+                    </div>
+
+                    <div class="chatbot-demo">
+                        <div class="chatbot-header">
+                            <div class="bot-avatar"><i class="fas fa-robot"></i></div>
+                            <div>
+                                <h3>MindCare AI Assistant</h3>
+                                <p style="color:#4CAF50; margin:0;">Online • Ready to help</p>
+                            </div>
+                        </div>
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message ai-message"><p><strong>AI:</strong> Hello! How can I support you today?</p></div>
+                        </div>
+
+                        <div class="chat-input">
+                            <input type="text" placeholder="Type your message..." id="chatInput" onkeypress="handleChatInput(event)">
+                            <button class="chat-send" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top:2rem;">
+                    <h3 class="section-title" style="font-size:1.6rem;">Assistant Capabilities</h3>
+                    <div class="features-grid" style="margin-top:1rem;">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-heartbeat"></i></div>
+                            <h3>Crisis Triage</h3>
+                            <p>Automatic detection of high-risk messages and recommended escalation steps for human review.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-book"></i></div>
+                            <h3>Self-help Exercises</h3>
+                            <p>Guided breathing, CBT-style reframing, grounding techniques and short meditations.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-link"></i></div>
+                            <h3>Professional Handoff</h3>
+                            <p>When needed, securely package session context for handoff to counselors or support staff.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer style="margin-top:4rem;">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3><i class="fas fa-brain" style="color:#FFD700; margin-right:.5rem;"></i>MindCare AI</h3>
+                        <p style="color:#ccc;">Empathetic, evidence-based support for students.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Platform</h3>
+                        <a href="login_page.html">Student Login</a>
+                        <a href="registration_page.html">Create Account</a>
+                        <a href="admin_page.html">Admin Portal</a>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Resources</h3>
+                        <a href="#">Help Center</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Contact</h3>
+                        <a href="mailto:support@mindcareai.edu">support@mindcareai.edu</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 MindCare AI. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="floating-chat" onclick="toggleFloatingChat()"><i class="fas fa-comments"></i></div>
+
+    <script>
+        function toggleMobileMenu(){ document.getElementById('navMenu').classList.toggle('active'); }
+        function openChatbot(){ alert('AI Chatbot: Launching intelligent mental health assistant.'); }
+        function handleChatInput(e){ if(e.key==='Enter') sendMessage(); }
+        function sendMessage(){
+            const input=document.getElementById('chatInput');
+            const messages=document.getElementById('chatMessages');
+            if(input && input.value.trim()!==''){
+                const userMsg=document.createElement('div'); userMsg.className='message user-message';
+                userMsg.innerHTML=`<p><strong>You:</strong> ${input.value}</p>`; messages.appendChild(userMsg);
+                setTimeout(()=>{ const aiMsg=document.createElement('div'); aiMsg.className='message ai-message';
+                    aiMsg.innerHTML=`<p><strong>AI:</strong> Thank you — I hear you. Here are a few things that may help right now...</p>`; messages.appendChild(aiMsg);
+                    messages.scrollTop = messages.scrollHeight;
+                },900);
+                input.value='';
+            }
+        }
+        function toggleFloatingChat(){ alert('Quick Chat: Opening instant AI assistance.'); }
+    </script>
+</body>
+</html>
