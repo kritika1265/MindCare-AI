@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - MindCare AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .resource-card.urgent {
+            border-left: 5px solid #FF6B6B;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+        }
+
+        .resource-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .resource-meta h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .resource-type {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .urgent-badge {
+            background: #FF6B6B;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        .resource-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .expand-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .expand-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .resource-content {
+            border-top: 2px solid #f0f4ff;
+            padding-top: 1.5rem;
+            display: none;
+        }
+
+        .resource-content.expanded {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .resource-content ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .resource-content li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .resource-content li:hover {
+            background: #f8f9ff;
+        }
+
+        .resource-content li i {
+            color: #4CAF50;
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        .crisis-note {
+            background: linear-gradient(135deg, #FFE5E5, #FFF0F0);
+            border: 2px solid #FF6B6B;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            color: #D32F2F;
+        }
+
+        .crisis-note i {
+            margin-right: 0.5rem;
+        }
+
+        .search-filter-section {
+            background: #f8f9ff;
+            padding: 3rem 0;
+            border-bottom: 1px solid #e6f0ff;
+        }
+
+        .search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid #e6f0ff;
+            font-size: 1.1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #667eea;
+        }
+
+        .category-btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            background: white;
+            color: #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 0.25rem;
+        }
+
+        .category-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .category-btn:hover:not(.active) {
+            background: #f0f4ff;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .resource-card {
+                padding: 1.5rem;
+            }
+            
+            .resource-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .resource-meta h3 {
+                font-size: 1.2rem;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6B73FF 100%); color: white; padding: 1rem 0; position: relative;">
+        <nav style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem;">
+            <a href="index.html" style="font-family: 'Poppins', sans-serif; font-size: 2.2rem; font-weight: 800; color: white; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fas fa-brain" style="font-size: 2rem; color: #FFD700;"></i>
+                MindCare AI
+            </a>
+            
+            <div style="display: flex; align-items: center; gap: 2rem;">
+                <div style="display: flex; gap: 2rem;">
+                    <a href="features.html" style="color: white; text-decoration: none; font-weight: 500;">Features</a>
+                    <a href="ai-assistant.html" style="color: white; text-decoration: none; font-weight: 500;">AI Assistant</a>
+                    <a href="about.html" style="color: white; text-decoration: none; font-weight: 500;">About</a>
+                    <a href="resources.html" style="color: white; text-decoration: none; font-weight: 500; border-bottom: 2px solid #FFD700;">Resources</a>
+                    <a href="#" style="color: white; text-decoration: none; font-weight: 500;">Contact</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 4rem 0; text-align: center;">
+        <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
+            <div style="background: rgba(255, 255, 255, 0.2); padding: 0.5rem 1rem; border-radius: 25px; display: inline-block; margin-bottom: 1.5rem; backdrop-filter: blur(10px);">
+                <i class="fas fa-book-medical" style="margin-right: 0.5rem;"></i>
+                Mental Health Resource Library
+            </div>
+            
+            <h1 style="font-family: 'Poppins', sans-serif; font-size: 3.5rem; font-weight: 800; margin-bottom: 1.5rem; line-height: 1.2;">
+                Your Complete Mental Wellness Toolkit
+            </h1>
+            
+            <p style="font-size: 1.2rem; opacity: 0.9; line-height: 1.7; margin-bottom: 2rem;">
+                Access evidence-based resources, emergency support, and practical tools designed specifically for student mental health and wellbeing.
+            </p>
+        </div>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section class="search-filter-section">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div style="margin-bottom: 2rem; text-align: center;">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search resources...">
+            </div>
+            
+            <div id="categoryButtons" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
+                <button class="category-btn active" data-category="all">
+                    <i class="fas fa-th-large" style="margin-right: 0.5rem;"></i>All Resources
+                </button>
+                <button class="category-btn" data-category="crisis">
+                    <i class="fas fa-exclamation-triangle" style="margin-right: 0.5rem;"></i>Crisis Support
+                </button>
+                <button class="category-btn" data-category="coping">
+                    <i class="fas fa-tools" style="margin-right: 0.5rem;"></i>Coping Strategies
+                </button>
+                <button class="category-btn" data-category="conditions">
+                    <i class="fas fa-brain" style="margin-right: 0.5rem;"></i>Mental Health Conditions
+                </button>
+                <button class="category-btn" data-category="academic">
+                    <i class="fas fa-book" style="margin-right: 0.5rem;"></i>Academic Support
+                </button>
+                <button class="category-btn" data-category="wellness">
+                    <i class="fas fa-heart" style="margin-right: 0.5rem;"></i>Wellness & Self-Care
+                </button>
+                <button class="category-btn" data-category="social">
+                    <i class="fas fa-users" style="margin-right: 0.5rem;"></i>Social Support
+                </button>
+                <button class="category-btn" data-category="practical">
+                    <i class="fas fa-life-ring" style="margin-right: 0.5rem;"></i>Practical Life Skills
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Grid -->
+    <section style="padding: 4rem 0; background: #ffffff;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div id="resourcesContainer" class="resources-grid">
+                <!-- Resources will be dynamically loaded here -->
+            </div>
+            <div id="noResults" style="text-align: center; padding: 4rem 0; color: #666; display: none;">
+                <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                <h3>No resources found</h3>
+                <p>Try adjusting your search terms or category filter.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Notice -->
+    <section style="background: linear-gradient(135deg, #FF6B6B, #FF8E8E); color: white; padding: 3rem 0; text-align: center;">
+        <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
+            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+            <h2 style="font-family: 'Poppins', sans-serif; margin-bottom: 1rem;">
+                In Crisis? Get Immediate Help
+            </h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                If you're experiencing thoughts of self-harm or suicide, please reach out for help immediately.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                <a href="tel:988" style="background: white; color: #FF6B6B; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <i class="fas fa-phone"></i>
+                    Call 988 - Suicide & Crisis Lifeline
+                </a>
+                <a href="sms:741741&body=HOME" style="background: rgba(255,255,255,0.2); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; border: 2px solid white;">
+                    <i class="fas fa-comment"></i>
+                    Text HOME to 741741
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #1a1a1a; color: white; padding: 4rem 0 2rem;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div>
+                    <h3 style="font-family: 'Poppins', sans-serif; margin-bottom: 1.5rem; color: #667eea; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-brain" style="color: #FFD700;"></i>
+                        MindCare AI
+                    </h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.7; color: #ccc;">
+                        Revolutionizing student mental health support through advanced artificial intelligence, providing personalized care and professional connections when you need them most.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 style="font-family: 'Poppins', sans-serif; margin-bottom: 1.5rem; color: #667eea;">
+                        Quick Access
+                    </h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <a href="#" style="color: #ccc; text-decoration: none;">Crisis Support Resources</a>
+                        <a href="#" style="color: #ccc; text-decoration: none;">AI Mental Health Assistant</a>
+                        <a href="#" style="color: #ccc; text-decoration: none;">Student Counseling Services</a>
+                        <a href="#" style="color: #ccc; text-decoration: none;">Wellness Tools & Guides</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid #333; color: #888;">
+                <p>&copy; 2025 MindCare AI. All rights reserved. | Privacy Policy | Terms of Service</p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                    <i class="fas fa-shield-alt" style="color: #4CAF50; margin-right: 0.5rem;"></i>
+                    HIPAA Compliant • End-to-End Encrypted • 24/7 AI Support
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Resources data
+        const resources = [
+            {
+                id: 1,
+                title: "24/7 Crisis Support Hotlines",
+                category: "crisis",
+                type: "Emergency Support",
+                description: "Immediate professional help available around the clock for mental health emergencies and crisis situations.",
+                content: [
+                    "National Suicide Prevention Lifeline: 988",
+                    "Crisis Text Line: Text HOME to 741741",
+                    "National Sexual Assault Hotline: 1-800-656-HOPE (4673)",
+                    "LGBTQ National Hotline: 1-888-843-4564",
+                    "Student Mental Health Crisis Line: 1-800-273-8255"
+                ],
+                icon: "fas fa-phone-alt",
+                color: "#FF6B6B",
+                urgent: true
+            },
+            {
+                id: 2,
+                title: "Stress Management Techniques",
+                category: "coping",
+                type: "Self-Help Guide",
+                description: "Evidence-based techniques to help manage academic stress, anxiety, and daily pressures effectively.",
+                content: [
+                    "Deep breathing exercises (4-7-8 technique)",
+                    "Progressive muscle relaxation",
+                    "Mindfulness meditation practices",
+                    "Time management strategies",
+                    "Study break scheduling",
+                    "Physical exercise routines"
+                ],
+                icon: "fas fa-leaf",
+                color: "#4ECDC4"
+            },
+            {
+                id: 3,
+                title: "Anxiety & Depression Resources",
+                category: "conditions",
+                type: "Educational Material",
+                description: "Comprehensive information about common mental health conditions affecting students and available treatments.",
+                content: [
+                    "Understanding anxiety disorders",
+                    "Recognizing depression symptoms",
+                    "Cognitive Behavioral Therapy (CBT) basics",
+                    "Medication information and side effects",
+                    "Campus counseling services directory",
+                    "Peer support group locations"
+                ],
+                icon: "fas fa-heart",
+                color: "#667eea"
+            },
+            {
+                id: 4,
+                title: "Academic Success & Mental Health",
+                category: "academic",
+                type: "Study Guide",
+                description: "Strategies to maintain mental wellness while achieving academic goals and managing coursework pressure.",
+                content: [
+                    "Balanced study schedules",
+                    "Exam anxiety management",
+                    "Perfectionism vs. healthy achievement",
+                    "Academic accommodation services",
+                    "Study group mental health tips",
+                    "Grade-related stress reduction"
+                ],
+                icon: "fas fa-graduation-cap",
+                color: "#45B7D1"
+            },
+            {
+                id: 5,
+                title: "Sleep & Mental Health",
+                category: "wellness",
+                type: "Health Guide",
+                description: "Understanding the critical connection between quality sleep and mental wellness for students.",
+                content: [
+                    "Sleep hygiene fundamentals",
+                    "Creating optimal sleep environment",
+                    "Managing screen time before bed",
+                    "Dealing with racing thoughts at night",
+                    "Power napping strategies",
+                    "Sleep disorder recognition"
+                ],
+                icon: "fas fa-moon",
+                color: "#9B59B6"
+            },
+            {
+                id: 6,
+                title: "Building Social Connections",
+                category: "social",
+                type: "Relationship Guide",
+                description: "Tips for developing healthy relationships and combating loneliness in academic environments.",
+                content: [
+                    "Overcoming social anxiety",
+                    "Joining clubs and organizations",
+                    "Building meaningful friendships",
+                    "Healthy relationship boundaries",
+                    "Dealing with peer pressure",
+                    "Supporting friends in crisis"
+                ],
+                icon: "fas fa-users",
+                color: "#F39C12"
+            },
+            {
+                id: 7,
+                title: "Mindfulness & Meditation",
+                category: "wellness",
+                type: "Practice Guide",
+                description: "Guided practices and techniques for developing mindfulness skills and emotional regulation.",
+                content: [
+                    "5-minute daily meditation routine",
+                    "Mindful breathing exercises",
+                    "Body scan relaxation",
+                    "Mindful walking techniques",
+                    "Emotional awareness practices",
+                    "Apps and online resources"
+                ],
+                icon: "fas fa-spa",
+                color: "#2ECC71"
+            },
+            {
+                id: 8,
+                title: "Financial Stress Management",
+                category: "practical",
+                type: "Life Skills",
+                description: "Resources for managing financial pressures that commonly affect student mental health.",
+                content: [
+                    "Budgeting for students",
+                    "Financial aid counseling",
+                    "Emergency financial assistance",
+                    "Part-time work balance",
+                    "Student loan anxiety management",
+                    "Free campus resources"
+                ],
+                icon: "fas fa-dollar-sign",
+                color: "#E67E22"
+            }
+        ];
+
+        let filteredResources = [...resources];
+        let selectedCategory = 'all';
+        let searchTerm = '';
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderResources();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Search input
+            document.getElementById('searchInput').addEventListener('input', function(e) {
+                searchTerm = e.target.value;
+                filterResources();
+            });
+
+            // Category buttons
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedCategory = this.dataset.category;
+                    filterResources();
+                });
+            });
+        }
+
+        function filterResources() {
+            filteredResources = resources.filter(resource => {
+                const matchesCategory = selectedCategory === 'all' || resource.category === selectedCategory;
+                const matchesSearch = !searchTerm || 
+                    resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    resource.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    resource.content.some(item => item.toLowerCase().includes(searchTerm.toLowerCase()));
+                
+                return matchesCategory && matchesSearch;
+            });
+
+            renderResources();
+        }
+
+        function renderResources() {
+            const container = document.getElementById('resourcesContainer');
+            const noResults = document.getElementById('noResults');
+
+            if (filteredResources.length === 0) {
+                container.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            container.style.display = 'grid';
+            noResults.style.display = 'none';
+
+            container.innerHTML = filteredResources.map(resource => `
+                <div class="resource-card ${resource.urgent ? 'urgent' : ''}">
+                    <div class="resource-header">
+                        <div class="resource-icon" style="background-color: ${resource.color};">
+                            <i class="${resource.icon}"></i>
+                        </div>
+                        <div class="resource-meta">
+                            <h3>${resource.title}</h3>
+                            <span class="resource-type">${resource.type}</span>
+                            ${resource.urgent ? '<span class="urgent-badge"><i class="fas fa-exclamation-circle"></i> Immediate Help</span>' : ''}
+                        </div>
+                    </div>
+                    
+                    <p class="resource-description">${resource.description}</p>
+                    
+                    <button class="expand-btn" onclick="toggleResource(${resource.id})">
+                        <i class="fas fa-chevron-down" id="icon-${resource.id}"></i>
+                        <span id="text-${resource.id}">View Details</span>
+                    </button>
+                    
+                    <div class="resource-content" id="content-${resource.id}">
+                        <ul>
+                            ${resource.content.map(item => `
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    ${item}
+                                </li>
+                            `).join('')}
+                        </ul>
+                        ${resource.urgent ? `
+                            <div class="crisis-note">
+                                <i class="fas fa-info-circle"></i>
+                                <strong>Remember:</strong> If you're in immediate danger, call 911 or go to your nearest emergency room.
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleResource(id) {
+            const content = document.getElementById(`content-${id}`);
+            const icon = document.getElementById(`icon-${id}`);
+            const text = document.getElementById(`text-${id}`);
+
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.className = 'fas fa-chevron-down';
+                text.textContent = 'View Details';
+            } else {
+                content.classList.add('expanded');
+                icon.className = 'fas fa-chevron-up';
+                text.textContent = 'Show Less';
+            }
+        }
+    </script>
+</body>
+</html>
