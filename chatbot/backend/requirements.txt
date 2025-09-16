@@ -1,0 +1,13 @@
+# Simplified requirements for MindCare AI
+# Core dependencies only
+
+Flask>=2.0.0
+Flask-CORS>=3.0.0
+Flask-SQLAlchemy>=2.5.0
+python-dotenv>=0.19.0
+
+# Optional - for advanced AI features
+# openai>=0.28.0
+
+# Optional - for production deployment
+# gunicorn>=20.0.0
