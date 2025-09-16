@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Features — MindCare AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="gradient-bg">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+
+        <header>
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-brain"></i>
+                    MindCare AI
+                </a>
+                <div class="nav-menu" id="navMenu">
+                    <ul class="nav-links">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="ai-assistant.html">AI Assistant</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="index.html">Resources</a></li>
+                        <li><a href="index.html">Contact</a></li>
+                    </ul>
+                    <div class="auth-buttons">
+                        <a href="login_page.html" class="btn-auth btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        <a href="registration_page.html" class="btn-auth btn-register"><i class="fas fa-user-plus"></i> Register</a>
+                        <a href="admin_page.html" class="btn-auth btn-admin"><i class="fas fa-user-shield"></i> Admin</a>
+                    </div>
+                </div>
+                <button class="mobile-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+            </nav>
+        </header>
+
+        <section class="features" id="features-section" style="padding-top:4rem;">
+            <div class="container">
+                <h2 class="section-title">Product Features</h2>
+                <p class="section-subtitle">All the tools your students need — powered by AI and designed with privacy in mind.</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                        <h3>AI Mental Health Assistant</h3>
+                        <p>Round-the-clock conversational support with evidence-based coping strategies and empathetic responses.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                        <h3>Intelligent Assessments</h3>
+                        <p>Personalized diagnostic flows that adapt to the user and generate concise, actionable recommendations.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Predictive Analytics</h3>
+                        <p>Detect subtle mood shifts and trends so interventions can be proactive, not reactive.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-user-md"></i></div>
+                        <h3>AI-Matched Professionals</h3>
+                        <p>Match students with counselors or services based on needs, availability, and preferences.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h3>Mobile-First Experience</h3>
+                        <p>Lightweight, responsive UI for the mobile app with offline-friendly features and notifications.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                        <h3>Privacy & Security</h3>
+                        <p>Enterprise-grade encryption, role-based access, and compliance-first architecture (HIPAA-ready).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer style="margin-top: 4rem;">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3><i class="fas fa-brain" style="color:#FFD700; margin-right:.5rem;"></i>MindCare AI</h3>
+                        <p style="color:#ccc;">Bringing accessible mental health tools to students with privacy-first AI.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Platform</h3>
+                        <a href="login_page.html">Student Login</a>
+                        <a href="registration_page.html">Create Account</a>
+                        <a href="admin_page.html">Admin Portal</a>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Resources</h3>
+                        <a href="#">Help Center</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms</a>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Contact</h3>
+                        <a href="mailto:support@mindcareai.edu">support@mindcareai.edu</a>
+                        <a href="#">Crisis Hotline</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 MindCare AI. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="floating-chat" onclick="toggleFloatingChat()"><i class="fas fa-comments"></i></div>
+
+    <script>
+        function toggleMobileMenu(){ document.getElementById('navMenu').classList.toggle('active'); }
+        function toggleFloatingChat(){ alert('Quick Chat: Opening instant AI assistance.'); }
+    </script>
+</body>
+</html>
