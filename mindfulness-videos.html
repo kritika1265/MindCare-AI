@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindfulness Videos - MindCare AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="assest/img/mindcare_favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .video-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+
+        .video-hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .filter-section {
+            background: #f8f9ff;
+            padding: 2rem 0;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .filter-tab {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            background: white;
+            color: #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-thumbnail {
+            height: 200px;
+            background: #000;
+        }
+
+        .video-thumbnail iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-content {
+            padding: 1.5rem;
+        }
+
+        .video-category {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .video-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #333;
+        }
+
+        .video-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .video-hero h1 {
+                font-size: 2.5rem;
+            }
+            .videos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6B73FF 100%); color: white; padding: 1rem 0; position: relative;">
+        <nav>
+            <a href="index.html" class="logo">
+                <i class="fas fa-brain"></i>
+                MindCare AI
+            </a>
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-links">
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="ai-assistant.html">AI Assistant</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="index.html">Contact</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="login_page.html" class="btn-auth btn-login">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <a href="registration_page.html" class="btn-auth btn-register">
+                        <i class="fas fa-user-plus"></i> Register
+                    </a>
+                    <a href="admin_page.html" class="btn-auth btn-admin">
+                        <i class="fas fa-user-shield"></i> Admin
+                    </a>
+                </div>
+            </div>
+            <button class="mobile-toggle" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <section class="video-hero">
+        <div class="container">
+            <h1>Mindfulness & Wellness Videos</h1>
+            <p>Discover guided meditations, breathing exercises, and mental wellness content designed specifically for students</p>
+        </div>
+    </section>
+
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-category="all">All Videos</button>
+                <button class="filter-tab" data-category="meditation">Meditation</button>
+                <button class="filter-tab" data-category="breathing">Breathing</button>
+                <button class="filter-tab" data-category="sleep">Sleep</button>
+                <button class="filter-tab" data-category="stress">Stress Relief</button>
+                <button class="filter-tab" data-category="focus">Focus</button>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 4rem 0;">
+        <div class="container">
+            <div class="videos-grid" id="videosGrid">
+                <!-- Videos will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-brain" style="color: #FFD700; margin-right: 0.5rem;"></i>
+                        MindCare AI
+                    </h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.7; color: #ccc;">Revolutionizing student mental health support through advanced artificial intelligence.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Platform Access</h3>
+                    <a href="login_page.html"><i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i>Student Login</a>
+                    <a href="registration_page.html"><i class="fas fa-user-plus" style="margin-right: 0.5rem;"></i>Create Account</a>
+                    <a href="admin_page.html"><i class="fas fa-user-shield" style="margin-right: 0.5rem;"></i>Admin Portal</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MindCare AI. All rights reserved. | HIPAA Compliant • End-to-End Encrypted • 24/7 AI Support</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const videos = [
+            {
+                id: 1,
+                title: "10-Minute Morning Meditation",
+                category: "meditation",
+                description: "Start your day with clarity and focus through this guided morning meditation practice.",
+                duration: "10:00",
+                rating: 4.8,
+                videoId: "inpok4MKVLM"
+            },
+            {
+                id: 2,
+                title: "4-7-8 Breathing Technique",
+                category: "breathing",
+                description: "Learn the powerful 4-7-8 breathing method to reduce anxiety and promote relaxation.",
+                duration: "5:30",
+                rating: 4.9,
+                videoId: "YRPh_GaiL8s"
+            },
+            {
+                id: 3,
+                title: "Sleep Meditation for Students",
+                category: "sleep",
+                description: "Drift off peacefully with this calming bedtime meditation designed for better sleep quality.",
+                duration: "20:00",
+                rating: 4.7,
+                videoId: "1vx8iUvfyCY"
+            },
+            {
+                id: 4,
+                title: "Exam Stress Relief Meditation",
+                category: "stress",
+                description: "Calm your mind and reduce exam anxiety with this targeted stress relief session.",
+                duration: "8:45",
+                rating: 4.6,
+                videoId: "O-6f5wQXSu8"
+            },
+            {
+                id: 5,
+                title: "Focus & Concentration Booster",
+                category: "focus",
+                description: "Enhance your concentration and mental clarity with this focus-enhancing meditation.",
+                duration: "12:30",
+                rating: 4.8,
+                videoId: "ssss7V1_eyA"
+            },
+            {
+                id: 6,
+                title: "Anxiety Relief Breathing",
+                category: "breathing",
+                description: "Quick and effective breathing exercises to manage anxiety and panic attacks.",
+                duration: "6:15",
+                rating: 4.9,
+                videoId: "tybOi4hjZFQ"
+            }
+        ];
+
+        let filteredVideos = [...videos];
+        let currentCategory = 'all';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderVideos();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.dataset.category;
+                    filterVideos();
+                });
+            });
+        }
+
+        function filterVideos() {
+            filteredVideos = videos.filter(video => {
+                return currentCategory === 'all' || video.category === currentCategory;
+            });
+            renderVideos();
+        }
+
+        function renderVideos() {
+            const grid = document.getElementById('videosGrid');
+            grid.innerHTML = filteredVideos.map(video => `
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <iframe src="https://www.youtube.com/embed/${video.videoId}" 
+                                title="${video.title}" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-content">
+                        <div class="video-category">${getCategoryName(video.category)}</div>
+                        <h3 class="video-title">${video.title}</h3>
+                        <p class="video-description">${video.description}</p>
+                        <div class="video-meta">
+                            <span><i class="fas fa-clock"></i> ${video.duration}</span>
+                            <span><i class="fas fa-star" style="color: #FFD700;"></i> ${video.rating}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getCategoryName(category) {
+            const names = {
+                meditation: 'Meditation',
+                breathing: 'Breathing',
+                sleep: 'Sleep',
+                stress: 'Stress Relief',
+                focus: 'Focus',
+                anxiety: 'Anxiety'
+            };
+            return names[category] || category;
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
