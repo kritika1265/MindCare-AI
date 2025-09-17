@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - MindCare AI</title>
@@ -722,5 +723,621 @@
             loginAttempts = 0;
         }
     </script>
+=======
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - MindCare AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6B73FF 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    /* Header Styles */
+    header {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo i {
+      font-size: 1.8rem;
+      color: #FFD700;
+    }
+
+    .nav-back {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .nav-back:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Admin Container */
+    .admin-container {
+      max-width: 1400px;
+      margin: 3rem auto;
+      background: white;
+      border-radius: 25px;
+      padding: 3rem;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .admin-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #667eea;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .admin-title i {
+      font-size: 2.2rem;
+      color: #FFD700;
+    }
+
+    .admin-info {
+      text-align: right;
+      color: #666;
+    }
+
+    .admin-info h3 {
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-card i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #FFD700;
+    }
+
+    .stat-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Table Styles */
+    .table-section {
+      margin-bottom: 3rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .table-container {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border: 1px solid #e0e0e0;
+    }
+
+    .user-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .user-table th {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 1.2rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .user-table td {
+      padding: 1.2rem;
+      text-align: left;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 0.95rem;
+    }
+
+    .user-table tr:hover {
+      background: #f8f9ff;
+    }
+
+    .user-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .status-badge {
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-active {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status-inactive {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .actions button {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .btn-edit {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .btn-edit:hover {
+      background: #45a049;
+      transform: translateY(-2px);
+    }
+
+    .btn-delete {
+      background: #f44336;
+      color: white;
+    }
+
+    .btn-delete:hover {
+      background: #da190b;
+      transform: translateY(-2px);
+    }
+
+    .btn-view {
+      background: #2196F3;
+      color: white;
+    }
+
+    .btn-view:hover {
+      background: #0b7dda;
+      transform: translateY(-2px);
+    }
+
+    /* Loading Screen */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6B73FF 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      color: white;
+    }
+
+    .loading-content {
+      text-align: center;
+    }
+
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 2rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .loading-subtext {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .admin-container {
+        margin: 1rem;
+        padding: 2rem 1rem;
+      }
+
+      .admin-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+
+      .admin-title {
+        font-size: 2rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .user-table {
+        font-size: 0.85rem;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Verifying Admin Access</div>
+      <div class="loading-subtext">Checking authentication credentials...</div>
+    </div>
+  </div>
+
+  <!-- Main Admin Content (hidden initially) -->
+  <div id="adminContent" style="display: none;">
+    <header>
+      <nav>
+        <a href="index.html" class="logo">
+          <i class="fas fa-brain"></i>
+          MindCare AI
+        </a>
+        <a href="#" class="nav-back" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i>
+          Logout
+        </a>
+      </nav>
+    </header>
+
+    <main class="admin-container">
+      <div class="admin-header">
+        <div>
+          <h1 class="admin-title">
+            <i class="fas fa-shield-alt"></i>
+            Admin Dashboard
+          </h1>
+          <p style="color: #666; margin-top: 0.5rem;">Manage users and monitor platform activity</p>
+        </div>
+        <div class="admin-info">
+          <h3>Welcome, Administrator</h3>
+          <p>Last login: <span id="lastLogin">Today, 2:30 PM</span></p>
+          <p>System Status: <span style="color: #4CAF50; font-weight: 600;">Online</span></p>
+        </div>
+      </div>
+
+      <!-- Statistics Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <i class="fas fa-users"></i>
+          <h3>1,247</h3>
+          <p>Active Users</p>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-graduation-cap"></i>
+          <h3>89</h3>
+          <p>Universities</p>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-comments"></i>
+          <h3>5,634</h3>
+          <p>AI Conversations</p>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-chart-line"></i>
+          <h3>94%</h3>
+          <p>Success Rate</p>
+        </div>
+      </div>
+
+      <!-- User Management Table -->
+      <div class="table-section">
+        <h2 class="section-title">User Management</h2>
+        <div class="table-container">
+          <table class="user-table">
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>University</th>
+                <th>Status</th>
+                <th>Last Active</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="userTableBody">
+              <tr>
+                <td>#1001</td>
+                <td>Alice Johnson</td>
+                <td>alice.johnson@mit.edu</td>
+                <td>MIT</td>
+                <td><span class="status-badge status-active">Active</span></td>
+                <td>2 hours ago</td>
+                <td class="actions">
+                  <button class="btn-view" onclick="viewUser('1001')">
+                    <i class="fas fa-eye"></i> View
+                  </button>
+                  <button class="btn-edit" onclick="editUser('1001')">
+                    <i class="fas fa-edit"></i> Edit
+                  </button>
+                  <button class="btn-delete" onclick="deleteUser('1001')">
+                    <i class="fas fa-trash"></i> Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1002</td>
+                <td>Bob Smith</td>
+                <td>bob.smith@stanford.edu</td>
+                <td>Stanford University</td>
+                <td><span class="status-badge status-active">Active</span></td>
+                <td>1 day ago</td>
+                <td class="actions">
+                  <button class="btn-view" onclick="viewUser('1002')">
+                    <i class="fas fa-eye"></i> View
+                  </button>
+                  <button class="btn-edit" onclick="editUser('1002')">
+                    <i class="fas fa-edit"></i> Edit
+                  </button>
+                  <button class="btn-delete" onclick="deleteUser('1002')">
+                    <i class="fas fa-trash"></i> Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1003</td>
+                <td>Sarah Wilson</td>
+                <td>sarah.w@harvard.edu</td>
+                <td>Harvard University</td>
+                <td><span class="status-badge status-inactive">Inactive</span></td>
+                <td>1 week ago</td>
+                <td class="actions">
+                  <button class="btn-view" onclick="viewUser('1003')">
+                    <i class="fas fa-eye"></i> View
+                  </button>
+                  <button class="btn-edit" onclick="editUser('1003')">
+                    <i class="fas fa-edit"></i> Edit
+                  </button>
+                  <button class="btn-delete" onclick="deleteUser('1003')">
+                    <i class="fas fa-trash"></i> Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1004</td>
+                <td>Michael Chen</td>
+                <td>m.chen@berkeley.edu</td>
+                <td>UC Berkeley</td>
+                <td><span class="status-badge status-active">Active</span></td>
+                <td>5 minutes ago</td>
+                <td class="actions">
+                  <button class="btn-view" onclick="viewUser('1004')">
+                    <i class="fas fa-eye"></i> View
+                  </button>
+                  <button class="btn-edit" onclick="editUser('1004')">
+                    <i class="fas fa-edit"></i> Edit
+                  </button>
+                  <button class="btn-delete" onclick="deleteUser('1004')">
+                    <i class="fas fa-trash"></i> Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Check authentication status on page load
+    window.addEventListener('load', function() {x
+      checkAuthentication();
+    });
+
+    function checkAuthentication() {
+      // Check if user is authenticated (in real app, check server session/token)
+      const isAuthenticated = sessionStorage.getItem('adminAuthenticated') === 'true';
+      
+      if (!isAuthenticated) {
+        // Show loading screen briefly then redirect to login
+        setTimeout(() => {
+          // Update loading text
+          document.querySelector('.loading-text').textContent = 'Access Denied';
+          document.querySelector('.loading-subtext').textContent = 'Redirecting to login page...';
+          
+          setTimeout(() => {
+            // Store the intended destination
+            sessionStorage.setItem('redirectAfterLogin', 'admin_page.html');
+            // Redirect to login page with admin mode
+            window.location.href = 'login_page.html?mode=admin';
+          }, 1500);
+        }, 1000);
+      } else {
+        // User is authenticated, show admin content
+        setTimeout(() => {
+          document.getElementById('loadingScreen').style.display = 'none';
+          document.getElementById('adminContent').style.display = 'block';
+          
+          // Fade in animation
+          document.getElementById('adminContent').style.opacity = '0';
+          setTimeout(() => {
+            document.getElementById('adminContent').style.transition = 'opacity 0.5s ease-in';
+            document.getElementById('adminContent').style.opacity = '1';
+          }, 100);
+        }, 1500);
+      }
+    }
+
+    // Admin functions
+    function viewUser(userId) {
+      alert(`Viewing details for User ID: ${userId}\n\nThis would open a detailed user profile with:\n• Personal information\n• Activity logs\n• Mental health progress\n• Communication history`);
+    }
+
+    function editUser(userId) {
+      alert(`Editing User ID: ${userId}\n\nThis would open a form to modify:\n• User permissions\n• Account settings\n• Notification preferences\n• Crisis intervention settings`);
+    }
+
+    function deleteUser(userId) {
+      if (confirm(`Are you sure you want to delete User ID: ${userId}?\n\nThis action cannot be undone and will:\n• Remove all user data\n• Delete conversation history\n• Revoke platform access`)) {
+        alert(`User ${userId} has been successfully deleted from the system.`);
+        // In real app, make API call to delete user
+      }
+    }
+
+    function logout() {
+      if (confirm('Are you sure you want to logout?')) {
+        // Clear authentication
+        sessionStorage.removeItem('adminAuthenticated');
+        sessionStorage.removeItem('redirectAfterLogin');
+        
+        // Show loading screen
+        document.getElementById('loadingScreen').style.display = 'flex';
+        document.querySelector('.loading-text').textContent = 'Logging Out';
+        document.querySelector('.loading-subtext').textContent = 'Securing your session...';
+        
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1500);
+      }
+    }
+
+    // Update last login time
+    function updateLastLogin() {
+      const now = new Date();
+      const timeString = now.toLocaleString('en-US', {
+        weekday: 'short',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      });
+      document.getElementById('lastLogin').textContent = timeString;
+    }
+
+    // Call on page load
+    setTimeout(updateLastLogin, 2000);
+  </script>
+>>>>>>> e686ce716424584bc31a1fc32e60b643be75616d
 </body>
 </html>
