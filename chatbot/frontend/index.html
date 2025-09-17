@@ -295,6 +295,7 @@
             flex-wrap: wrap;
             gap: 10px;
             margin-top: 15px;
+            justify-content: center;
         }
 
         .quick-action-btn {
@@ -311,6 +312,7 @@
         .quick-action-btn:hover {
             background: rgba(79, 172, 254, 0.2);
             border-color: #4facfe;
+            transform: translateY(-2px);
         }
 
         /* Mobile Responsive */
@@ -333,6 +335,14 @@
                 width: 40px;
                 height: 40px;
                 font-size: 1.2rem;
+            }
+
+            .quick-actions {
+                justify-content: center;
+            }
+
+            .mood-selector {
+                flex-wrap: wrap;
             }
         }
 
@@ -407,6 +417,9 @@
                 this.initializeElements();
                 this.bindEvents();
                 this.checkBackendHealth();
+                
+                // Store instance globally for quick actions
+                window.mindcareChatbot = this;
             }
 
             generateUserId() {
@@ -418,6 +431,23 @@
                 this.chatMessages = document.getElementById('chatMessages');
                 this.messageInput = document.getElementById('messageInput');
                 this.sendBtn = document.getElementById('sendBtn');
+                this.moodBtns = document.querySelectorAll('.mood-btn');
+            }
+
+            bindEvents() {
+                this.sendBtn.addEventListener('click', () => this.sendMessage());
+                
+                this.messageInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        this.sendMessage();
+                    }
+                });
+
+                this.messageInput.addEventListener('input', () => {
+                    this.autoResizeTextarea();
+                });
+
                 this.moodBtns.forEach(btn => {
                     btn.addEventListener('click', (e) => this.logMood(e.target.dataset.mood));
                 });
@@ -430,7 +460,7 @@
                     console.log('✅ Backend connected successfully');
                 } catch (error) {
                     console.warn('⚠️ Backend not available, using offline mode');
-                    this.showMessage('bot', '⚠️ I\'m currently running in offline mode. Some features may be limited, but I\'m still here to help!', true);
+                    this.showMessage('bot', '⚠️ I\'m currently running in offline mode. Some features may be limited, but I\'m still here to help!', false);
                 }
             }
 
@@ -498,7 +528,7 @@
                 const lowerMessage = message.toLowerCase();
                 
                 // Crisis detection
-                const crisisKeywords = ['suicide', 'kill myself', 'end it all', 'self-harm', 'hurt myself'];
+                const crisisKeywords = ['suicide', 'kill myself', 'end it all', 'self-harm', 'hurt myself', 'want to die'];
                 if (crisisKeywords.some(keyword => lowerMessage.includes(keyword))) {
                     return `🆘 I'm very concerned about what you're sharing. Please reach out for immediate help:
                     
@@ -545,6 +575,42 @@ What's one small thing you could do today that might bring you a tiny bit of com
 • What's one tiny action you could take right now?
 
 Remember: You don't have to do everything at once. Progress, not perfection. 💪`;
+                }
+
+                // Greeting responses
+                if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                    return `Hello! 👋 I'm so glad you're here. I'm MindCare AI, and I'm here to provide you with emotional support and mental health guidance.
+
+I'm a safe space where you can share what's on your mind. Whether you're dealing with stress, anxiety, sadness, or just need someone to listen, I'm here for you.
+
+How are you feeling today? What would you like to talk about? 💙`;
+                }
+
+                // Coping strategies
+                if (lowerMessage.includes('coping') || lowerMessage.includes('strategies') || lowerMessage.includes('help me cope')) {
+                    return `Here are some evidence-based coping strategies that might help:
+
+🧘 **Mindfulness & Relaxation:**
+• Deep breathing exercises
+• Progressive muscle relaxation
+• Mindful meditation (even 5 minutes helps)
+
+🏃 **Physical Wellness:**
+• Light exercise or stretching
+• Take a walk outside
+• Stay hydrated
+
+💭 **Cognitive Strategies:**
+• Challenge negative thoughts
+• Practice gratitude (name 3 things you're grateful for)
+• Use positive self-talk
+
+🤝 **Social Support:**
+• Reach out to a trusted friend or family member
+• Join a support group
+• Talk to a mental health professional
+
+Which of these feels most accessible to you right now?`;
                 }
 
                 // General supportive response
@@ -609,7 +675,7 @@ How are you feeling right now? I'm here to help you work through it, one step at
                 // Visual feedback
                 this.moodBtns.forEach(btn => btn.classList.remove('active'));
                 const selectedBtn = document.querySelector(`[data-mood="${moodLevel}"]`);
-                selectedBtn.classList.add('active');
+                if (selectedBtn) selectedBtn.classList.add('active');
 
                 try {
                     await fetch(`${this.apiUrl}/mood`, {
@@ -664,21 +730,4 @@ How are you feeling right now? I'm here to help you work through it, one step at
         };
     </script>
 </body>
-</html>ns = document.querySelectorAll('.mood-btn');
-            }
-
-            bindEvents() {
-                this.sendBtn.addEventListener('click', () => this.sendMessage());
-                
-                this.messageInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        this.sendMessage();
-                    }
-                });
-
-                this.messageInput.addEventListener('input', () => {
-                    this.autoResizeTextarea();
-                });
-
-                this.moodBt
+</html>
