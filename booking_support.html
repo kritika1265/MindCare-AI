@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peer Support Forum - MindCare AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e6f0ff 100%);
+            min-height: 100vh;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6B73FF 100%);
+            position: relative;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            top: 50%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        .shape:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 30%;
+            right: 40%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+            padding: 1rem 0;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: #FFD700;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .page-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .community-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Forum Layout */
+        .forum-container {
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .sidebar-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .topic-list {
+            list-style: none;
+        }
+
+        .topic-list li {
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .topic-list li:hover,
+        .topic-list li.active {
+            background: #f8f9ff;
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .topic-list li i {
+            margin-right: 0.8rem;
+            color: #667eea;
+            min-width: 16px;
+        }
+
+        .online-users {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .user-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .user-item:hover {
+            background: #f8f9ff;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .user-status {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .online-indicator {
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+        }
+
+        /* Main Forum Content */
+        .forum-main {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .forum-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .forum-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .forum-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .new-post-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .new-post-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Posts */
+        .posts-container {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .post-item {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .post-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .post-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .post-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .post-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-username {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.2rem;
+        }
+
+        .post-time {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .post-category {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .post-content {
+            margin-bottom: 1rem;
+        }
+
+        .post-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.8rem;
+        }
+
+        .post-text {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .post-reactions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .reaction-btn {
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .reaction-btn:hover {
+            background: #f0f0f0;
+            color: #667eea;
+        }
+
+        .reaction-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .reply-btn {
+            background: none;
+            border: 1px solid #e0e0e0;
+            color: #666;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .reply-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        /* Anonymous Badge */
+        .anonymous-badge {
+            background: linear-gradient(135deg, #9C27B0, #673AB7);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        /* Moderation Notice */
+        .moderation-notice {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .moderation-notice i {
+            font-size: 1.2rem;
+        }
+
+        /* New Post Form */
+        .new-post-form {
+            display: none;
+            background: #f8f9ff;
+            border: 2px solid #e6f0ff;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .new-post-form.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .forum-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+            }
+
+            .community-stats {
+                gap: 2rem;
+            }
+
+            nav {
+                padding: 0 1rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .forum-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .post-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .post-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .post-reactions {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        
+        <header>
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-brain"></i>
+                    MindCare AI
+                </a>
+                <div class="nav-menu">
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="booking-system.html">Book Session</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                    </ul>
+                    <a href="index.html" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Home
+                    </a>
+                </div>
+            </nav>
+        </header>
+    </div>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1><i class="fas fa-users" style="color: #4CAF50; margin-right: 1rem;"></i>Peer Support Forum</h1>
+                <p>Connect with fellow students in a safe, anonymous, and supportive community. Share experiences, find strength in connection, and support each other on your mental health journeys.</p>
+                
+                <div class="community-stats">
+                    <div class="stat-item">
+                        <h3>2,847</h3>
+                        <p>Active Members</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>156</h3>
+                        <p>Online Now</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>98%</h3>
+                        <p>Positive Feedback</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>24/7</h3>
+                        <p>AI Moderated</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="moderation-notice">
+                <i class="fas fa-shield-alt"></i>
+                <div>
+                    <strong>AI-Powered Safe Space:</strong> This forum is actively monitored by our AI moderation system and professional moderators to ensure a supportive, respectful environment. Anonymous posting is encouraged, and all content is reviewed for safety and appropriateness.
+                </div>
+            </div>
+
+            <div class="forum-container">
+                <!-- Left Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-list"></i> Topics</h3>
+                        <ul class="topic-list">
+                            <li class="active" data-topic="general">
+                                <i class="fas fa-comments"></i> General Support
+                            </li>
+                            <li data-topic="anxiety">
+                                <i class="fas fa-heart"></i> Anxiety & Stress
+                            </li>
+                            <li data-topic="depression">
+                                <i class="fas fa-cloud-sun"></i> Depression Support
+                            </li>
+                            <li data-topic="academic">
+                                <i class="fas fa-graduation-cap"></i> Academic Pressure
+                            </li>
+                            <li data-topic="relationships">
+                                <i class="fas fa-users"></i> Relationships
+                            </li>
+                            <li data-topic="self-care">
+                                <i class="fas fa-leaf"></i> Self-Care Tips
+                            </li>
+                            <li data-topic="success">
+                                <i class="fas fa-star"></i> Success Stories
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-user-friends"></i> Online Now</h3>
+                        <div class="online-users">
+                            <div class="user-item">
+                                <div class="user-avatar">AN</div>
+                                <div class="user-info">
+                                    <div class="user-name">Anonymous User</div>
+                                    <div class="user-status">Active now</div>
+                                </div>
+                                <div class="online-indicator"></div>
+                            </div>
+                            <div class="user-item">
+                                <div class="user-avatar">SH</div>
+                                <div class="user-info">
+                                    <div class="user-name">StudyHelper23</div>
+                                    <div class="user-status">2 min ago</div>
+                                </div>
+                                <div class="online-indicator"></div>
+                            </div>
+                            <div class="user-item">
+                                <div class="user-avatar">MF</div>
+                                <div class="user-info">
+                                    <div class="user-name">MindfulStudent</div>
+                                    <div class="user-status">5 min ago</div>
+                                </div>
+                                <div class="online-indicator"></div>
+                            </div>
+                            <div class="user-item">
+                                <div class="user-avatar">WW</div>
+                                <div class="user-info">
+                                    <div class="user-name">WorriedWanderer</div>
+                                    <div class="user-status">8 min ago</div>
+                                </div>
+                                <div class="online-indicator"></div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Forum Content -->
+                <main class="forum-main">
+                    <div class="forum-header">
+                        <h2 class="forum-title">
+                            <i class="fas fa-comments"></i>
+                            General Support
+                        </h2>
+                        <button class="new-post-btn" onclick="toggleNewPostForm()">
+                            <i class="fas fa-plus"></i>
+                            Share Your Story
+                        </button>
+                    </div>
+
+                    <!-- New Post Form -->
+                    <div class="new-post-form" id="newPostForm">
+                        <h3 style="font-family: 'Poppins', sans-serif; margin-bottom: 1.5rem; color: #333;">
+                            <i class="fas fa-pencil-alt" style="color: #667eea; margin-right: 0.5rem;"></i>
+                            Share Your Experience
+                        </h3>
+                        
+                        <div class="form-group">
+                            <label for="postCategory">Category</label>
+                            <select id="postCategory" name="postCategory">
+                                <option value="general">General Support</option>
+                                <option value="anxiety">Anxiety & Stress</option>
+                                <option value="depression">Depression Support</option>
+                                <option value="academic">Academic Pressure</option>
+                                <option value="relationships">Relationships</option>
+                                <option value="self-care">Self-Care Tips</option>
+                                <option value="success">Success Stories</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="postTitle">Title</label>
+                            <input type="text" id="postTitle" name="postTitle" placeholder="Give your post a helpful title">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="postContent">Your Message</label>
+                            <textarea id="postContent" name="postContent" placeholder="Share your thoughts, experiences, or questions. Remember, this is a safe space for support and understanding."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 0.8rem; cursor: pointer;">
+                                <input type="checkbox" id="anonymousPost" style="width: auto;">
+                                <span>Post anonymously</span>
+                                <i class="fas fa-info-circle" style="color: #667eea;" title="Your identity will be completely hidden"></i>
+                            </label>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="toggleNewPostForm()">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="submitPost()">
+                                <i class="fas fa-paper-plane"></i>
+                                Share Post
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Posts Container -->
+                    <div class="posts-container" id="postsContainer">
+                        <!-- Post 1 -->
+                        <article class="post-item">
+                            <div class="post-header">
+                                <div class="post-author">
+                                    <div class="post-avatar">AN</div>
+                                    <div class="post-meta">
+                                        <div class="post-username">
+                                            Anonymous User
+                                            <span class="anonymous-badge">ANONYMOUS</span>
+                                        </div>
+                                        <div class="post-time">2 hours ago</div>
+                                    </div>
+                                </div>
+                                <div class="post-category">General Support</div>
+                            </div>
+                            <div class="post-content">
+                                <h3 class="post-title">Feeling overwhelmed with everything</h3>
+                                <p class="post-text">
+                                    Hey everyone, I'm in my third year of university and lately I've been feeling completely overwhelmed. Between coursework, part-time work, and family expectations, I feel like I'm drowning. Does anyone else feel this way? How do you cope when everything feels too much?
+                                </p>
+                            </div>
+                            <div class="post-actions">
+                                <div class="post-reactions">
+                                    <button class="reaction-btn active">
+                                        <i class="fas fa-heart"></i> 24
+                                    </button>
+                                    <button class="reaction-btn">
+                                        <i class="fas fa-thumbs-up"></i> 18
+                                    </button>
+                                    <button class="reaction-btn">
+                                        <i class="fas fa-hug"></i> 31
+                                    </button>
+                                </div>
+                                <button class="reply-btn">
+                                    <i class="fas fa-reply"></i>
+                                    Reply (12)
+                                </button>
+                            </div>
+                        </article>
+
+                        <!-- Post 2 -->
+                        <article class="post-item">
+                            <div class="post-header">
+                                <div class="post-author">
+                                    <div class="post-avatar">MF</div>
+                                    <div class="post-meta">
+                                        <div class="post-username">MindfulStudent</div>
+                                        <div class="post-time">4 hours ago</div>
+                                    </div>
+                                </div>
+                                <div class="post-category" style="background: linear-gradient(135deg, #9C27B0, #673AB7);">Self-Care Tips</div>
+                            </div>
+                            <div class="post-content">
+                                <h3 class="post-title">5-minute meditation technique that changed my life</h3>
+                                <p class="post-text">
+                                    I wanted to share a simple breathing technique that has really helped me manage anxiety during exam periods. It's called the 4-7-8 method: breathe in for 4 counts, hold for 7, exhale for 8. Just 5 minutes of this before studying or sleeping has made such a difference. Hope this helps someone else too!
+                                </p>
+                            </div>
+                            <div class="post-actions">
+                                <div class="post-reactions">
+                                    <button class="reaction-btn">
+                                        <i class="fas fa-heart"></i> 42
+                                    </button>
+                                    <button class="reaction-btn active">
+                                        <i class="fas fa-thumbs-up"></i> 28
+                                    </button>
+                                    <button class="reaction-btn">
+                                        <i class="fas fa-star"></i> 15
+                                    </button>
+                                </div>
+                                <button class="reply-btn">
+                                    <i class="fas fa-reply"></i>
+                                    Reply (8)
+                                </button>
+                            </div>
+                        </article>
+
+                        <!-- Post 3 -->
+                        <article class="post-item">
+                            <div class="post-header">
+                                <div class="post-author">
+                                    <div class="post-avatar">SH</div>
+                                    <div class="post-meta">
+                                        <div class="post-username">StudyHelper23</div>
+                                        <div class="post-time">6 hours ago</div>
+                                    </div>
+                                </div>
+                                <div class="post-category" style="background: linear-gradient(135deg, #FF9800, #F57C00);">Academic Pressure</div>
+                            </div>
+                            <div class="post-content">
+                                <h3 class="post-title">Imposter syndrome hitting hard before finals</h3>
+                                <p class="post-text">
+                                    Anyone else feel like they don't belong in their program? Finals are coming up and I keep thinking "I don't deserve to be here" or "Everyone is smarter than me." I know logically that I've earned my place, but the feelings are so strong. How do you deal with imposter syndrome?
+                                </p>
+                            </div>
+                            <div class="post-actions">
+                                <div class="post-reactions">
+                                    <button class="reaction-btn">
+                                        <i class="fas fa-heart"></i> 36
+                                    </button>
+                                    <button class="reaction-btn">
+                                        <i class="fas fa-thumbs-up"></i> 22
+                                    </button>
+                                    <button class="reaction-btn active">
+                                        <i class="fas fa-hug"></i> 48
+                                    </button>
+                                </div>
+                                <button class="reply-btn">
+                                    <i class="fas fa-reply"></i>
+                                    Reply (15)
+                                </button>
+                            </div>
+                        </article>
+
+                        <!-- Post 4 -->
+                        <article class="post-item">
+                            <div class="post-header">
+                                <div class="post-author">
+                                    <div class="post-avatar">WW</div>
+                                    <div class="post-meta">
+                                        <div class="post-username">
+                                            WorriedWanderer
+                                            <span class="anonymous-badge">ANONYMOUS</span>
+                                        </div>
+                                        <div class="post-time">1 day ago</div>
+                                    </div>
+                                </div>
+                                <div class="post-category" style="background: linear-gradient(135deg, #E91E63, #C2185B);">Depression Support</div>
+                            </div>
+                            <div class="post-content">
+                                <h3 class="post-title">Small win today - got out of bed and showered</h3>
+                                <p class="post-text">
+                                    I know it sounds silly, but I've been in a really dark place lately. Today I managed to get up, shower, and even made myself breakfast. It might seem small to others, but for me it feels huge. To anyone struggling - you're not alone, and small steps count too.
+                                </p>
+                            </div>
+                            <div class="post-actions">
+                                <div class="post-reactions">
+                                    <button class="reaction-btn">
+                                        <i class="fas fa-heart"></i> 89
+                                    </button>
+                                    <button class="reaction-btn">
+                                        <i class="fas fa-thumbs-up"></i> 67
+                                    </button>
+                                    <button class="reaction-btn active">
+                                        <i class="fas fa-star"></i> 43
+                                    </button>
+                                </div>
+                                <button class="reply-btn">
+                                    <i class="fas fa-reply"></i>
+                                    Reply (23)
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+                </main>
+
+                <!-- Right Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-shield-alt"></i> Community Guidelines</h3>
+                        <ul style="list-style: none; font-size: 0.9rem; color: #666;">
+                            <li style="display: flex; align-items: flex-start; margin-bottom: 1rem;">
+                                <i class="fas fa-heart" style="color: #4CAF50; margin-right: 0.8rem; margin-top: 0.2rem; min-width: 16px;"></i>
+                                <span>Be kind, supportive, and respectful to all community members</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; margin-bottom: 1rem;">
+                                <i class="fas fa-user-secret" style="color: #667eea; margin-right: 0.8rem; margin-top: 0.2rem; min-width: 16px;"></i>
+                                <span>Respect privacy and anonymity preferences</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; margin-bottom: 1rem;">
+                                <i class="fas fa-ban" style="color: #FF6B6B; margin-right: 0.8rem; margin-top: 0.2rem; min-width: 16px;"></i>
+                                <span>No harmful, discriminatory, or triggering content</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; margin-bottom: 1rem;">
+                                <i class="fas fa-life-ring" style="color: #FF9800; margin-right: 0.8rem; margin-top: 0.2rem; min-width: 16px;"></i>
+                                <span>Share resources and coping strategies positively</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-phone"></i> Crisis Resources</h3>
+                        <div style="space-y: 1rem;">
+                            <div style="margin-bottom: 1.5rem; padding: 1rem; background: #fff3e0; border-radius: 8px; border-left: 4px solid #ff9800;">
+                                <h4 style="color: #FF9800; margin: 0 0 0.5rem 0; font-size: 0.95rem;">
+                                    <i class="fas fa-exclamation-triangle"></i> Emergency
+                                </h4>
+                                <p style="font-size: 0.85rem; margin: 0; color: #666;">Call 911 or go to your nearest emergency room</p>
+                            </div>
+                            
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4 style="color: #667eea; margin-bottom: 0.8rem; font-size: 0.95rem;">
+                                    <i class="fas fa-phone" style="margin-right: 0.5rem;"></i>Crisis Hotlines
+                                </h4>
+                                <div style="font-size: 0.85rem; color: #666; line-height: 1.5;">
+                                    <p style="margin: 0 0 0.5rem 0;"><strong>988</strong> - Suicide & Crisis Lifeline</p>
+                                    <p style="margin: 0 0 0.5rem 0;"><strong>Text HOME to 741741</strong> - Crisis Text Line</p>
+                                    <p style="margin: 0;"><strong>1-800-662-4357</strong> - SAMHSA Helpline</p>
+                                </div>
+                            </div>
+
+                            <button style="width: 100%; background: linear-gradient(135deg, #FF6B6B, #FF8E53); color: white; border: none; padding: 0.8rem; border-radius: 8px; font-weight: 600; cursor: pointer;" onclick="showCrisisResources()">
+                                <i class="fas fa-life-ring"></i> More Crisis Resources
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-chart-line"></i> Your Activity</h3>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0;">
+                                <span style="color: #666; font-size: 0.9rem;">Posts shared</span>
+                                <span style="font-weight: 600; color: #667eea;">3</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0;">
+                                <span style="color: #666; font-size: 0.9rem;">Replies given</span>
+                                <span style="font-weight: 600; color: #667eea;">12</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0;">
+                                <span style="color: #666; font-size: 0.9rem;">Hearts received</span>
+                                <span style="font-weight: 600; color: #667eea;">47</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.5rem 0;">
+                                <span style="color: #666; font-size: 0.9rem;">Days active</span>
+                                <span style="font-weight: 600; color: #667eea;">8</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentTopic = 'general';
+        let newPostFormVisible = false;
+
+        // Toggle new post form
+        function toggleNewPostForm() {
+            const form = document.getElementById('newPostForm');
+            newPostFormVisible = !newPostFormVisible;
+            
+            if (newPostFormVisible) {
+                form.classList.add('active');
+                document.getElementById('postTitle').focus();
+            } else {
+                form.classList.remove('active');
+                clearForm();
+            }
+        }
+
+        // Clear form fields
+        function clearForm() {
+            document.getElementById('postCategory').value = currentTopic;
+            document.getElementById('postTitle').value = '';
+            document.getElementById('postContent').value = '';
+            document.getElementById('anonymousPost').checked = false;
+        }
+
+        // Submit new post
+        function submitPost() {
+            const category = document.getElementById('postCategory').value;
+            const title = document.getElementById('postTitle').value;
+            const content = document.getElementById('postContent').value;
+            const isAnonymous = document.getElementById('anonymousPost').checked;
+
+            if (!title.trim() || !content.trim()) {
+                alert('Please fill in both title and content for your post.');
+                return;
+            }
+
+            // Create new post element
+            const newPost = createPostElement({
+                title: title,
+                content: content,
+                category: category,
+                isAnonymous: isAnonymous,
+                author: isAnonymous ? 'Anonymous User' : 'You',
+                time: 'Just now',
+                reactions: { hearts: 0, thumbs: 0, hugs: 0 },
+                replies: 0
+            });
+
+            // Add to posts container
+            const postsContainer = document.getElementById('postsContainer');
+            postsContainer.insertBefore(newPost, postsContainer.firstChild);
+
+            // Close form and show success
+            toggleNewPostForm();
+            
+            // Scroll to new post
+            newPost.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Highlight new post briefly
+            newPost.style.border = '2px solid #4CAF50';
+            setTimeout(() => {
+                newPost.style.border = '1px solid #e0e0e0';
+            }, 3000);
+
+            alert('Your post has been shared successfully! Thank you for contributing to our supportive community.');
+        }
+
+        // Create post element
+        function createPostElement(postData) {
+            const postElement = document.createElement('article');
+            postElement.className = 'post-item';
+            
+            const categoryColors = {
+                'general': 'linear-gradient(135deg, #4CAF50, #45a049)',
+                'anxiety': 'linear-gradient(135deg, #FF9800, #F57C00)',
+                'depression': 'linear-gradient(135deg, #E91E63, #C2185B)',
+                'academic': 'linear-gradient(135deg, #FF9800, #F57C00)',
+                'relationships': 'linear-gradient(135deg, #9C27B0, #673AB7)',
+                'self-care': 'linear-gradient(135deg, #9C27B0, #673AB7)',
+                'success': 'linear-gradient(135deg, #4CAF50, #45a049)'
+            };
+
+            postElement.innerHTML = `
+                <div class="post-header">
+                    <div class="post-author">
+                        <div class="post-avatar">${postData.isAnonymous ? 'AN' : 'YU'}</div>
+                        <div class="post-meta">
+                            <div class="post-username">
+                                ${postData.author}
+                                ${postData.isAnonymous ? '<span class="anonymous-badge">ANONYMOUS</span>' : ''}
+                            </div>
+                            <div class="post-time">${postData.time}</div>
+                        </div>
+                    </div>
+                    <div class="post-category" style="background: ${categoryColors[postData.category] || categoryColors['general']}">${getCategoryDisplayName(postData.category)}</div>
+                </div>
+                <div class="post-content">
+                    <h3 class="post-title">${postData.title}</h3>
+                    <p class="post-text">${postData.content}</p>
+                </div>
+                <div class="post-actions">
+                    <div class="post-reactions">
+                        <button class="reaction-btn" onclick="toggleReaction(this, 'heart')">
+                            <i class="fas fa-heart"></i> ${postData.reactions.hearts}
+                        </button>
+                        <button class="reaction-btn" onclick="toggleReaction(this, 'thumbs')">
+                            <i class="fas fa-thumbs-up"></i> ${postData.reactions.thumbs}
+                        </button>
+                        <button class="reaction-btn" onclick="toggleReaction(this, 'hug')">
+                            <i class="fas fa-hug"></i> ${postData.reactions.hugs}
+                        </button>
+                    </div>
+                    <button class="reply-btn" onclick="showReplies(this)">
+                        <i class="fas fa-reply"></i>
+                        Reply (${postData.replies})
+                    </button>
+                </div>
+            `;
+            
+            return postElement;
+        }
+
+        // Get category display name
+        function getCategoryDisplayName(category) {
+            const categoryNames = {
+                'general': 'General Support',
+                'anxiety': 'Anxiety & Stress',
+                'depression': 'Depression Support',
+                'academic': 'Academic Pressure',
+                'relationships': 'Relationships',
+                'self-care': 'Self-Care Tips',
+                'success': 'Success Stories'
+            };
+            return categoryNames[category] || 'General Support';
+        }
+
+        // Toggle reaction
+        function toggleReaction(button, type) {
+            const isActive = button.classList.contains('active');
+            
+            // Remove active from all reaction buttons in this post
+            const postActions = button.closest('.post-actions');
+            postActions.querySelectorAll('.reaction-btn').forEach(btn => btn.classList.remove('active'));
+            
+            if (!isActive) {
+                button.classList.add('active');
+                // Increment count
+                const countSpan = button.textContent.trim().split(' ')[1];
+                const newCount = parseInt(countSpan) + 1;
+                button.innerHTML = button.innerHTML.replace(countSpan, newCount);
+            } else {
+                // Decrement count
+                const countSpan = button.textContent.trim().split(' ')[1];
+                const newCount = Math.max(0, parseInt(countSpan) - 1);
+                button.innerHTML = button.innerHTML.replace(countSpan, newCount);
+            }
+        }
+
+        // Show replies (placeholder)
+        function showReplies(button) {
+            alert('Reply functionality would open a detailed view with replies and the ability to add your own supportive response.');
+        }
+
+        // Show crisis resources
+        function showCrisisResources() {
+            const crisisInfo = `
+                COMPREHENSIVE CRISIS SUPPORT RESOURCES:
+                
+                🆘 IMMEDIATE EMERGENCY ASSISTANCE:
+                • Emergency Services: 911
+                • Campus Safety: Contact your university's emergency number
+                
+                📞 NATIONAL CRISIS HOTLINES:
+                • National Suicide Prevention Lifeline: 988 (24/7)
+                • Crisis Text Line: Text HOME to 741741 (24/7)
+                • SAMHSA National Helpline: 1-800-662-4357 (24/7)
+                • Trans Lifeline: 877-565-8860
+                • LGBT National Hotline: 1-888-843-4564
+                
+                💬 ONLINE SUPPORT:
+                • MindCare AI Crisis Chat: Available 24/7 through our emergency portal
+                • Crisis Chat: crisischat.org
+                • IMAlive: imalive.org
+                
+                🏥 LOCAL RESOURCES:
+                • Campus Counseling Center
+                • Local Emergency Room
+                • Community Mental Health Center
+                
+                Remember: You are valued, you matter, and help is always available. Reach out - someone cares about you.
+            `;
+            
+            alert(crisisInfo);
+        }
+
+        // Switch topics
+        document.querySelectorAll('.topic-list li').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.topic-list li').forEach(li => li.classList.remove('active'));
+                item.classList.add('active');
+                
+                currentTopic = item.dataset.topic;
+                const forumTitle = document.querySelector('.forum-title');
+                forumTitle.innerHTML = `<i class="fas fa-comments"></i> ${getCategoryDisplayName(currentTopic)}`;
+                
+                // Here you would typically filter posts by category
+                // For demo purposes, we'll just update the form default
+                if (newPostFormVisible) {
+                    document.getElementById('postCategory').value = currentTopic;
+                }
+            });
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add smooth animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.post-item, .sidebar-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease-out';
+                observer.observe(el);
+            });
+
+            // Add existing reaction functionality to existing posts
+            document.querySelectorAll('.reaction-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const button = e.currentTarget;
+                    const type = button.querySelector('i').classList.contains('fa-heart') ? 'heart' : 
+                                button.querySelector('i').classList.contains('fa-thumbs-up') ? 'thumbs' : 'hug';
+                    toggleReaction(button, type);
+                });
+            });
+
+            // Add reply functionality to existing posts
+            document.querySelectorAll('.reply-btn').forEach(btn => {
+                btn.addEventListener('click', () => showReplies(btn));
+            });
+        });
+    </script>
+</body>
+</html>

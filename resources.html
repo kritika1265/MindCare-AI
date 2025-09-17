@@ -6,6 +6,7 @@
     <title>Resources - MindCare AI</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         * {
             margin: 0;
@@ -256,24 +257,40 @@
 </head>
 <body>
     <!-- Header -->
-    <header style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6B73FF 100%); color: white; padding: 1rem 0; position: relative;">
-        <nav style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem;">
-            <a href="index.html" style="font-family: 'Poppins', sans-serif; font-size: 2.2rem; font-weight: 800; color: white; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
-                <i class="fas fa-brain" style="font-size: 2rem; color: #FFD700;"></i>
-                MindCare AI
-            </a>
-            
-            <div style="display: flex; align-items: center; gap: 2rem;">
-                <div style="display: flex; gap: 2rem;">
-                    <a href="features.html" style="color: white; text-decoration: none; font-weight: 500;">Features</a>
-                    <a href="ai-assistant.html" style="color: white; text-decoration: none; font-weight: 500;">AI Assistant</a>
-                    <a href="about.html" style="color: white; text-decoration: none; font-weight: 500;">About</a>
-                    <a href="resources.html" style="color: white; text-decoration: none; font-weight: 500; border-bottom: 2px solid #FFD700;">Resources</a>
-                    <a href="#" style="color: white; text-decoration: none; font-weight: 500;">Contact</a>
+        <header style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6B73FF 100%); color: white; padding: 1rem 0; position: relative;">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-brain"></i>
+                    MindCare AI
+                </a>
+                <div class="nav-menu" id="navMenu">
+                    <ul class="nav-links">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="ai-assistant.html">AI Assistant</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="my-app/src/App.js">Contact</a></li>
+                    </ul>
+                    <div class="auth-buttons">
+                        <a href="login_page.html" class="btn-auth btn-login" onclick="openLogin()">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Login
+                        </a>
+                        <a href="registration_page.html" class="btn-auth btn-register" onclick="openRegister()">
+                            <i class="fas fa-user-plus"></i>
+                            Register
+                        </a>
+                        <a href="admin_login.html" class="btn-auth btn-admin">
+                            <i class="fas fa-user-shield"></i>
+                            Admin
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
+                <button class="mobile-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </header>
 
     <!-- Hero Section -->
     <section style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 4rem 0; text-align: center;">
@@ -367,34 +384,46 @@
     </section>
 
     <!-- Footer -->
-    <footer style="background: #1a1a1a; color: white; padding: 4rem 0 2rem;">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
-                <div>
-                    <h3 style="font-family: 'Poppins', sans-serif; margin-bottom: 1.5rem; color: #667eea; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-brain" style="color: #FFD700;"></i>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-brain" style="color: #FFD700; margin-right: 0.5rem;"></i>
                         MindCare AI
                     </h3>
-                    <p style="margin-bottom: 1.5rem; line-height: 1.7; color: #ccc;">
-                        Revolutionizing student mental health support through advanced artificial intelligence, providing personalized care and professional connections when you need them most.
-                    </p>
-                </div>
-                
-                <div>
-                    <h3 style="font-family: 'Poppins', sans-serif; margin-bottom: 1.5rem; color: #667eea;">
-                        Quick Access
-                    </h3>
-                    <div style="display: flex; flex-direction: column; gap: 0.8rem;">
-                        <a href="#" style="color: #ccc; text-decoration: none;">Crisis Support Resources</a>
-                        <a href="#" style="color: #ccc; text-decoration: none;">AI Mental Health Assistant</a>
-                        <a href="#" style="color: #ccc; text-decoration: none;">Student Counseling Services</a>
-                        <a href="#" style="color: #ccc; text-decoration: none;">Wellness Tools & Guides</a>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.7; color: #ccc;">Revolutionizing student mental health support through advanced artificial intelligence, providing personalized care and professional connections when you need them most.</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: #667eea; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: #667eea; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: #667eea; font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: #667eea; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
+                <div class="footer-section">
+                    <h3>Platform Access</h3>
+                    <a href="login_page.html" onclick="openLogin()"><i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i>Student Login</a>
+                    <a href="registration_page.html" onclick="openRegister()"><i class="fas fa-user-plus" style="margin-right: 0.5rem;"></i>Create Account</a>
+                    <a href="admin_page.html" onclick="openAdmin()"><i class="fas fa-user-shield" style="margin-right: 0.5rem;"></i>Admin Portal</a>
+                    <a href="index.html"><i class="fas fa-mobile-alt" style="margin-right: 0.5rem;"></i>Mobile App</a>
+                </div>
+                <div class="footer-section">
+                    <h3>AI Features</h3>
+                    <a href="#"><i class="fas fa-robot" style="margin-right: 0.5rem;"></i>AI Assistant</a>
+                    <a href="#"><i class="fas fa-brain" style="margin-right: 0.5rem;"></i>Smart Assessment</a>
+                    <a href="#"><i class="fas fa-chart-line" style="margin-right: 0.5rem;"></i>Mood Analytics</a>
+                    <a href="#"><i class="fas fa-shield-alt" style="margin-right: 0.5rem;"></i>Crisis Detection</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Support & Resources</h3>
+                    <a href="#"><i class="fas fa-question-circle" style="margin-right: 0.5rem;"></i>Help Center</a>
+                    <a href="#"><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>Crisis Hotline</a>
+                    <a href="#"><i class="fas fa-book" style="margin-right: 0.5rem;"></i>Resource Library</a>
+                    <a href="#"><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>support@mindcareai.edu</a>
+                </div>
             </div>
-            
-            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid #333; color: #888;">
-                <p>&copy; 2025 MindCare AI. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MindCare AI. All rights reserved. | SIH Project 2025 | Privacy Policy | Terms of Service</p>
                 <p style="margin-top: 0.5rem; font-size: 0.9rem;">
                     <i class="fas fa-shield-alt" style="color: #4CAF50; margin-right: 0.5rem;"></i>
                     HIPAA Compliant • End-to-End Encrypted • 24/7 AI Support

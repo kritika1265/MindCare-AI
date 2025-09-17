@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Session - MindCare AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6B73FF 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            top: 50%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        .shape:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 30%;
+            right: 40%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+            padding: 1rem 0;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: #FFD700;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .booking-container {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            margin-bottom: 4rem;
+        }
+
+        .booking-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e6f0ff 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .service-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .service-card.selected .service-icon {
+            background: white;
+            color: #667eea;
+        }
+
+        .service-info h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-info .duration {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .service-description {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .service-features li i {
+            color: #4CAF50;
+            margin-right: 0.5rem;
+        }
+
+        .service-card.selected .service-features li i {
+            color: white;
+        }
+
+        .price-tag {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .service-card.selected .price-tag {
+            background: white;
+            color: #667eea;
+        }
+
+        .booking-form {
+            background: #f8f9ff;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .datetime-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .time-slot {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .time-slot:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .time-slot.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .time-slot.unavailable {
+            background: #f5f5f5;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Counselor Cards */
+        .counselor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .counselor-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .counselor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .counselor-card.selected {
+            border-color: #667eea;
+        }
+
+        .counselor-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .counselor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        .counselor-info h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .counselor-title {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .counselor-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .stars {
+            color: #FFD700;
+        }
+
+        .rating-text {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .counselor-specialties {
+            margin-bottom: 1rem;
+        }
+
+        .specialty-tag {
+            display: inline-block;
+            background: #e6f0ff;
+            color: #667eea;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+        }
+
+        .counselor-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .availability-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4CAF50;
+        }
+
+        .status-dot.busy {
+            background: #FF9800;
+        }
+
+        .status-dot.offline {
+            background: #999;
+        }
+
+        /* Emergency Section */
+        .emergency-section {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .emergency-section h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .emergency-section p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .emergency-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .emergency-btn {
+            background: white;
+            color: #FF6B6B;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .emergency-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 4rem 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 1.5rem;
+            color: #667eea;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #888;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .booking-container {
+                padding: 1.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .datetime-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+
+            .booking-tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                border-bottom: none;
+                border-left: 3px solid transparent;
+                text-align: left;
+            }
+
+            .tab-btn.active {
+                border-left-color: #667eea;
+                border-bottom-color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        
+        <header>
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-brain"></i>
+                    MindCare AI
+                </a>
+                <div class="nav-menu">
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#book-session" class="active">Book Session</a></li>
+                        <li><a href="#resources">Resources</a></li>
+                    </ul>
+                    <a href="#" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Home
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <div class="main-content">
+            <div class="page-header">
+                <h1>Book Your Session</h1>
+                <p>Connect with our AI-powered mental health support or professional counselors. Choose the type of support that's right for you.</p>
+            </div>
+
+            <div class="booking-container">
+                <div class="booking-tabs">
+                    <button class="tab-btn active" onclick="switchTab('ai-session')">AI Assistant Session</button>
+                    <button class="tab-btn" onclick="switchTab('human-counselor')">Human Counselor</button>
+                    <button class="tab-btn" onclick="switchTab('group-session')">Group Sessions</button>
+                </div>
+
+                <!-- AI Assistant Session Tab -->
+                <div id="ai-session" class="tab-content active">
+                    <div class="service-grid">
+                        <div class="service-card selected" onclick="selectService(this)">
+                            <div class="service-header">
+                                <div class="service-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="service-info">
+                                    <h3>AI Chat Session</h3>
+                                    <div class="duration">24/7 Available</div>
+                                </div>
+                            </div>
+                            <div class="service-description">
+                                Instant support from our advanced AI mental health assistant trained on therapeutic techniques.
+                            </div>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i>Immediate availability</li>
+                                <li><i class="fas fa-check"></i>Crisis detection & support</li>
+                                <li><i class="fas fa-check"></i>Personalized coping strategies</li>
+                                <li><i class="fas fa-check"></i>Progress tracking</li>
+                            </ul>
+                            <div class="price-tag">Free</div>
+                        </div>
+
+                        <div class="service-card" onclick="selectService(this)">
+                            <div class="service-header">
+                                <div class="service-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div class="service-info">
+                                    <h3>AI Assessment</h3>
+                                    <div class="duration">15-20 minutes</div>
+                                </div>
+                            </div>
+                            <div class="service-description">
+                                Comprehensive AI-powered mental health assessment with personalized recommendations.
+                            </div>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i>Evidence-based questionnaires</li>
+                                <li><i class="fas fa-check"></i>Instant results & insights</li>
+                                <li><i class="fas fa-check"></i>Personalized care plan</li>
+                                <li><i class="fas fa-check"></i>Professional referrals</li>
+                            </ul>
+                            <div class="price-tag">Free</div>
+                        </div>
+                    </div>
+
+                    <div class="booking-form">
+                        <h3 style="margin-bottom: 1.5rem; color: #333;">Start Your AI Session</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" placeholder="Your age" min="13" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="university">University/College</label>
+                                <input type="text" id="university" placeholder="Your institution">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="concerns">What would you like to discuss? (Optional)</label>
+                                <textarea id="concerns" rows="3" placeholder="Brief description of what's on your mind..."></textarea>
+                            </div>
+                        </div>
+                        <button class="btn-primary" onclick="startAISession()">
+                            <i class="fas fa-comments"></i>
+                            Start AI Session Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Human Counselor Tab -->
+                <div id="human-counselor" class="tab-content">
+                    <div class="emergency-section">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Need Immediate Help?</h3>
+                        <p>If you're experiencing a mental health emergency or having thoughts of self-harm, please reach out immediately.</p>
+                        <div class="emergency-contacts">
+                            <a href="tel:988" class="emergency-btn">
+                                <i class="fas fa-phone"></i>
+                                Crisis Hotline: 988
+                            </a>
+                            <a href="#" class="emergency-btn">
+                                <i class="fas fa-comments"></i>
+                                Emergency Chat
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="counselor-grid">
+                        <div class="counselor-card" onclick="selectCounselor(this)">
+                            <div class="counselor-header">
+                                <div class="counselor-avatar">DR</div>
+                                <div class="counselor-info">
+                                    <h3>Dr. Sarah Richards</h3>
+                                    <div class="counselor-title">Licensed Clinical Psychologist</div>
+                                </div>
+                            </div>
+                            <div class="counselor-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-text">4.9 (127 reviews)</span>
+                            </div>
+                            <div class="counselor-specialties">
+                                <span class="specialty-tag">Anxiety</span>
+                                <span class="specialty-tag">Depression</span>
+                                <span class="specialty-tag">Academic Stress</span>
+                                <span class="specialty-tag">CBT</span>
+                            </div>
+                            <div class="availability-indicator">
+                                <div class="status-dot"></div>
+                                Available today
+                            </div>
+                            <div class="counselor-stats">
+                                <span>8+ years experience</span>
+                                <span>$75/session</span>
+                            </div>
+                        </div>
+
+                        <div class="counselor-card" onclick="selectCounselor(this)">
+                            <div class="counselor-header">
+                                <div class="counselor-avatar">MJ</div>
+                                <div class="counselor-info">
+                                    <h3>Dr. Michael Johnson</h3>
+                                    <div class="counselor-title">Licensed Therapist, LMFT</div>
+                                </div>
+                            </div>
+                            <div class="counselor-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-text">4.8 (89 reviews)</span>
+                            </div>
+                            <div class="counselor-specialties">
+                                <span class="specialty-tag">Relationship Issues</span>
+                                <span class="specialty-tag">Social Anxiety</span>
+                                <span class="specialty-tag">Life Transitions</span>
+                            </div>
+                            <div class="availability-indicator">
+                                <div class="status-dot busy"></div>
+                                Next available: Tomorrow
+                            </div>
+                            <div class="counselor-stats">
+                                <span>12+ years experience</span>
+                                <span>$85/session</span>
+                            </div>
+                        </div>
+
+                        <div class="counselor-card" onclick="selectCounselor(this)">
+                            <div class="counselor-header">
+                                <div class="counselor-avatar">AC</div>
+                                <div class="counselor-info">
+                                    <h3>Dr. Amanda Chen</h3>
+                                    <div class="counselor-title">Psychiatrist, MD</div>
+                                </div>
+                            </div>
+                            <div class="counselor-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-text">4.9 (156 reviews)</span>
+                            </div>
+                            <div class="counselor-specialties">
+                                <span class="specialty-tag">ADHD</span>
+                                <span class="specialty-tag">Depression</span>
+                                <span class="specialty-tag">Medication Management</span>
+                                <span class="specialty-tag">Bipolar Disorder</span>
+                            </div>
+                            <div class="availability-indicator">
+                                <div class="status-dot"></div>
+                                Available this afternoon
+                            </div>
+                            <div class="counselor-stats">
+                                <span>15+ years experience</span>
+                                <span>$120/session</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="booking-form" id="counselor-booking" style="display: none;">
+                        <h3 style="margin-bottom: 1.5rem; color: #333;">Book Your Session</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="counselor-name">Full Name</label>
+                                <input type="text" id="counselor-name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="counselor-email">Email Address</label>
+                                <input type="email" id="counselor-email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="counselor-phone">Phone Number</label>
+                                <input type="tel" id="counselor-phone" placeholder="Your phone number" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="insurance">Insurance Provider (Optional)</label>
+                                <select id="insurance">
+                                    <option value="">Select insurance provider</option>
+                                    <option value="aetna">Aetna</option>
+                                    <option value="bluecross">Blue Cross Blue Shield</option>
+                                    <option value="cigna">Cigna</option>
+                                    <option value="united">UnitedHealthcare</option>
+                                    <option value="other">Other</option>
+                                    <option value="self-pay">Self Pay</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Preferred Date & Time</label>
+                                <div class="datetime-grid">
+                                    <input type="date" id="counselor-date" min="" required>
+                                    <select id="counselor-time" required>
+                                        <option value="">Select time</option>
+                                        <option value="09:00">9:00 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="14:00">2:00 PM</option>
+                                        <option value="15:00">3:00 PM</option>
+                                        <option value="16:00">4:00 PM</option>
+                                        <option value="17:00">5:00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="session-type">Session Type</label>
+                                <select id="session-type" required>
+                                    <option value="video">Video Call (Recommended)</option>
+                                    <option value="phone">Phone Call</option>
+                                    <option value="in-person">In-Person (if available)</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="counselor-concerns">What would you like to focus on in your session?</label>
+                                <textarea id="counselor-concerns" rows="3" placeholder="Briefly describe what you'd like to discuss..."></textarea>
+                            </div>
+                        </div>
+                        <button class="btn-primary" onclick="bookCounselorSession()">
+                            <i class="fas fa-calendar-check"></i>
+                            Book Session - $75
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Group Sessions Tab -->
+                <div id="group-session" class="tab-content">
+                    <div class="service-grid">
+                        <div class="service-card" onclick="selectService(this)">
+                            <div class="service-header">
+                                <div class="service-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="service-info">
+                                    <h3>Anxiety Support Group</h3>
+                                    <div class="duration">1 hour • Weekly</div>
+                                </div>
+                            </div>
+                            <div class="service-description">
+                                Connect with peers facing similar anxiety challenges in a supportive, moderated environment.
+                            </div>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i>Professional facilitator</li>
+                                <li><i class="fas fa-check"></i>6-8 participants maximum</li>
+                                <li><i class="fas fa-check"></i>Confidential & safe space</li>
+                                <li><i class="fas fa-check"></i>Weekly commitment</li>
+                            </ul>
+                            <div class="price-tag">$25/session</div>
+                        </div>
+
+                        <div class="service-card" onclick="selectService(this)">
+                            <div class="service-header">
+                                <div class="service-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="service-info">
+                                    <h3>Academic Stress Workshop</h3>
+                                    <div class="duration">2 hours • Monthly</div>
+                                </div>
+                            </div>
+                            <div class="service-description">
+                                Learn practical strategies for managing academic pressure, exam anxiety, and study-life balance.
+                            </div>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i>Interactive workshops</li>
+                                <li><i class="fas fa-check"></i>Study techniques training</li>
+                                <li><i class="fas fa-check"></i>Stress management tools</li>
+                                <li><i class="fas fa-check"></i>Take-home resources</li>
+                            </ul>
+                            <div class="price-tag">$35/workshop</div>
+                        </div>
+
+                        <div class="service-card" onclick="selectService(this)">
+                            <div class="service-header">
+                                <div class="service-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div class="service-info">
+                                    <h3>Mindfulness Circle</h3>
+                                    <div class="duration">45 minutes • Bi-weekly</div>
+                                </div>
+                            </div>
+                            <div class="service-description">
+                                Guided meditation and mindfulness practice in a supportive group setting.
+                            </div>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i>Guided meditation</li>
+                                <li><i class="fas fa-check"></i>Mindfulness techniques</li>
+                                <li><i class="fas fa-check"></i>Stress reduction focus</li>
+                                <li><i class="fas fa-check"></i>All experience levels</li>
+                            </ul>
+                            <div class="price-tag">$20/session</div>
+                        </div>
+
+                        <div class="service-card" onclick="selectService(this)">
+                            <div class="service-header">
+                                <div class="service-icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <div class="service-info">
+                                    <h3>Peer Support Network</h3>
+                                    <div class="duration">1 hour • Weekly</div>
+                                </div>
+                            </div>
+                            <div class="service-description">
+                                Student-led support group focused on sharing experiences and mutual encouragement.
+                            </div>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i>Peer-facilitated</li>
+                                <li><i class="fas fa-check"></i>Diverse topics covered</li>
+                                <li><i class="fas fa-check"></i>Rotating leadership</li>
+                                <li><i class="fas fa-check"></i>Community building</li>
+                            </ul>
+                            <div class="price-tag">Free</div>
+                        </div>
+                    </div>
+
+                    <div class="booking-form">
+                        <h3 style="margin-bottom: 1.5rem; color: #333;">Join a Group Session</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="group-name">Full Name</label>
+                                <input type="text" id="group-name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="group-email">Email Address</label>
+                                <input type="email" id="group-email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="group-age">Age</label>
+                                <input type="number" id="group-age" placeholder="Your age" min="18" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="group-university">University/College</label>
+                                <input type="text" id="group-university" placeholder="Your institution">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="group-experience">Previous group therapy experience?</label>
+                                <select id="group-experience">
+                                    <option value="none">No previous experience</option>
+                                    <option value="some">Some experience</option>
+                                    <option value="extensive">Extensive experience</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="group-goals">What do you hope to gain from group sessions?</label>
+                                <textarea id="group-goals" rows="3" placeholder="Share your goals and expectations..."></textarea>
+                            </div>
+                        </div>
+                        <button class="btn-primary" onclick="joinGroupSession()">
+                            <i class="fas fa-user-plus"></i>
+                            Join Group Session
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-brain" style="color: #FFD700; margin-right: 0.5rem;"></i>
+                        MindCare AI
+                    </h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.7; color: #ccc;">Revolutionizing student mental health support through advanced artificial intelligence, providing personalized care and professional connections when you need them most.</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: #667eea; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: #667eea; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: #667eea; font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: #667eea; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Platform Access</h3>
+                    <a href="#" onclick="openLogin()"><i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i>Student Login</a>
+                    <a href="#" onclick="openRegister()"><i class="fas fa-user-plus" style="margin-right: 0.5rem;"></i>Create Account</a>
+                    <a href="#" onclick="openAdmin()"><i class="fas fa-user-shield" style="margin-right: 0.5rem;"></i>Admin Portal</a>
+                    <a href="#"><i class="fas fa-mobile-alt" style="margin-right: 0.5rem;"></i>Mobile App</a>
+                </div>
+                <div class="footer-section">
+                    <h3>AI Features</h3>
+                    <a href="#"><i class="fas fa-robot" style="margin-right: 0.5rem;"></i>AI Assistant</a>
+                    <a href="#"><i class="fas fa-brain" style="margin-right: 0.5rem;"></i>Smart Assessment</a>
+                    <a href="#"><i class="fas fa-chart-line" style="margin-right: 0.5rem;"></i>Mood Analytics</a>
+                    <a href="#"><i class="fas fa-shield-alt" style="margin-right: 0.5rem;"></i>Crisis Detection</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Support & Resources</h3>
+                    <a href="#"><i class="fas fa-question-circle" style="margin-right: 0.5rem;"></i>Help Center</a>
+                    <a href="#"><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>Crisis Hotline</a>
+                    <a href="#"><i class="fas fa-book" style="margin-right: 0.5rem;"></i>Resource Library</a>
+                    <a href="#"><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>support@mindcareai.edu</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MindCare AI. All rights reserved. | SIH Project 2025 | Privacy Policy | Terms of Service</p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                    <i class="fas fa-shield-alt" style="color: #4CAF50; margin-right: 0.5rem;"></i>
+                    HIPAA Compliant • End-to-End Encrypted • 24/7 AI Support
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set minimum date to today
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('counselor-date').setAttribute('min', today);
+        });
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Service selection
+        function selectService(element) {
+            // Remove selected class from all service cards in the same container
+            element.parentNode.querySelectorAll('.service-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked card
+            element.classList.add('selected');
+        }
+
+        // Counselor selection
+        function selectCounselor(element) {
+            // Remove selected class from all counselor cards
+            document.querySelectorAll('.counselor-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked card
+            element.classList.add('selected');
+            
+            // Show booking form
+            document.getElementById('counselor-booking').style.display = 'block';
+            document.getElementById('counselor-booking').scrollIntoView({ behavior: 'smooth' });
+            
+            // Update price in button based on selected counselor
+            const counselorName = element.querySelector('h3').textContent;
+            const price = element.querySelector('.counselor-stats span:last-child').textContent;
+            const bookingBtn = document.querySelector('#counselor-booking .btn-primary');
+            bookingBtn.innerHTML = `<i class="fas fa-calendar-check"></i> Book Session - ${price}`;
+        }
+
+        // Start AI Session
+        function startAISession() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const age = document.getElementById('age').value;
+            
+            if (!name || !email || !age) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Simulate AI session start
+            alert(`Welcome ${name}! Starting your AI mental health session. You'll be connected with our AI assistant in a moment.`);
+            
+            // In a real implementation, this would redirect to the AI chat interface
+            // window.location.href = '/ai-chat-session';
+        }
+
+        // Book Counselor Session
+        function bookCounselorSession() {
+            const name = document.getElementById('counselor-name').value;
+            const email = document.getElementById('counselor-email').value;
+            const phone = document.getElementById('counselor-phone').value;
+            const date = document.getElementById('counselor-date').value;
+            const time = document.getElementById('counselor-time').value;
+            const sessionType = document.getElementById('session-type').value;
+            
+            if (!name || !email || !phone || !date || !time || !sessionType) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            const selectedCounselor = document.querySelector('.counselor-card.selected .counselor-info h3').textContent;
+            
+            alert(`Session booked successfully!\n\nCounselor: ${selectedCounselor}\nDate: ${date}\nTime: ${time}\nType: ${sessionType}\n\nYou'll receive a confirmation email shortly.`);
+        }
+
+        // Join Group Session
+        function joinGroupSession() {
+            const name = document.getElementById('group-name').value;
+            const email = document.getElementById('group-email').value;
+            const age = document.getElementById('group-age').value;
+            
+            if (!name || !email || !age) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            const selectedService = document.querySelector('#group-session .service-card.selected .service-info h3');
+            const serviceName = selectedService ? selectedService.textContent : 'a group session';
+            
+            alert(`Thank you ${name}! Your application to join ${serviceName} has been submitted. You'll receive more information about upcoming sessions via email.`);
+        }
+
+        // Auth functions (placeholder)
+        function openLogin() {
+            alert('Login Portal: This will redirect to the student login page with secure authentication.');
+        }
+
+        function openRegister() {
+            alert('Registration: This will open the student registration form with university verification.');
+        }
+
+        function openAdmin() {
+            alert('Admin Portal: This will redirect to the administrative dashboard for authorized personnel only.');
+        }
+    </script>
+</body>
+</html>
