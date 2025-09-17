@@ -727,7 +727,6 @@
             .features-grid {
                 grid-template-columns: 1fr;
             }
-<<<<<<< HEAD
         }
 
 /* NAvbar features */
@@ -1460,6 +1459,4 @@
             .features-grid {
                 grid-template-columns: 1fr;
             }
-=======
->>>>>>> e686ce716424584bc31a1fc32e60b643be75616d
         }
